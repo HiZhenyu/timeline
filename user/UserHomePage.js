@@ -54,11 +54,11 @@ export default class UserHomePage extends Component {
   }
 
   _onPressMoreTimeline(){
-    if(!global.appNavigator) return ;
+    if(!this.props.navigator) return ;
     var props = {user:this.state.user} ;
 
     //使用Navigation方案
-    global.appNavigator.push({
+    this.props.navigator.push({
       screen: 'user.UserTimelinePage',
       title: undefined,
       passProps: props,
@@ -79,9 +79,9 @@ export default class UserHomePage extends Component {
 
   componentDidMount(){
     return null ;
-    global.appNavigator.callback = (()=>{
+    this.props.navigator.callback = (()=>{
       this.setState({holdOn:false}) ;
-      global.appNavigator.callback = false ;
+      this.props.navigator.callback = false ;
     }).bind(this) ;
   }
 
@@ -111,32 +111,36 @@ export default class UserHomePage extends Component {
         >
 
           <LCUserBigSP
+            navigator={this.props.navigator}
             uid={user.uid}
             doUpdate={this.state.doUpdateUserBigSP}
             updateCallback={(js)=>this._updateRefreshState({doUpdateUserBigSP:false})}
             user={user} />
 
-          <LCTitle title="Ta的勋章" />
+          <LCTitle navigator={this.props.navigator} title="Ta的勋章" />
           <LCUserMedals
+            navigator={this.props.navigator}
             uid={user.uid}
             doUpdate={this.state.doUpdateUserMedals}
             updateCallback={(js)=>this._updateRefreshState({doUpdateUserMedals:false})} />
 
-          <LCTitle title="Ta的机友会" />
+          <LCTitle navigator={this.props.navigator} title="Ta的机友会" />
           <LCUserCats
+            navigator={this.props.navigator}
             uid={user.uid}
             doUpdate={this.state.doUpdateUserCats}
             updateCallback={(js)=>this._updateRefreshState({doUpdateUserCats:false})}
            />
 
-          <LCTitle title="Ta的动态" />
+          <LCTitle navigator={this.props.navigator} title="Ta的动态" />
           <LCTimelineList
+            navigator={this.props.navigator}
             doUpdate={this.state.doUpdateTimlineList}
             updateCallback={(js)=>this._updateRefreshState({doUpdateTimlineList:false})}
             holdOn={this.state.holdOn}
             uid={user.uid}
             scrollsToTop={false}
-            renderFooter={()=><LCMoreLine title="更多动态..." onPress={this._onPressMoreTimeline.bind(this)} />}
+            renderFooter={()=><LCMoreLine navigator={this.props.navigator} title="更多动态..." onPress={this._onPressMoreTimeline.bind(this)} />}
           />
 
         </ScrollView>

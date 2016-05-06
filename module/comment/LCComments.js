@@ -27,10 +27,10 @@ export default class LCComments extends Component {
   }
 
   _onPressMore(){
-    if(!global.appNavigator) return ;
+    if(!this.props.navigator) return ;
 
     var props = {timeline:this.state.timeline} ;
-    global.appNavigator.push({
+    this.props.navigator.push({
         name: 'TimelinePage',
         component: TimelinePage,
         params: props,
@@ -44,7 +44,7 @@ export default class LCComments extends Component {
     return (
       <View style={[styles.commentsItem]} key={comment.id}>
         <Text style={styles.itemText} allowFontScaling={false}>
-          <LCUser user={comment.user} styleId={2} />：
+          <LCUser navigator={this.props.navigator} user={comment.user} styleId={2} />：
           <Text style={styles.itemcText} numberOfLines={3} allowFontScaling={false}>
           {contents}
           </Text>

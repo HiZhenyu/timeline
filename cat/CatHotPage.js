@@ -4,22 +4,22 @@ import React, {
   TouchableHighlight ,
   View,
   RefreshControl,
+  ScrollView,
   Text,
 } from 'react-native';
 
 import GiftedSpinner from 'react-native-gifted-spinner' ;
-import LCTimelineList from './../module/timeline/LCTimelineList' ;
+import LCCatHots from './../module/cat/LCCatHots' ;
+import LCTitle from './../module/pub/LCTitle' ;
 
-export default class CatDetailTimelinePage extends Component {
+export default class CatHotPage extends Component {
   constructor(props) {
     super(props) ;
 
     //需要下拉更新的锁们
-    this.doUpdateStates = ['doUpdateTimelineList'] ;
+    this.doUpdateStates = ['doUpdateCatHots'] ;
     this.state = {
-      cat: this.props.cat ,
       refreshing:false,
-      scrollsToTop:!!this.props.scrollsToTop,
       holdOn:!!this.props.holdOn,
     } ;
 
@@ -64,24 +64,40 @@ export default class CatDetailTimelinePage extends Component {
     return (<View style={[styles.spinner,style]}><GiftedSpinner /><Text allowFontScaling={false}>正在加载...</Text></View>) ;
   }
 
+
+  _onPressMoreCat(m){
+    console.log(m) ;
+  }
+
+  _getCatMName(m){
+    let ms = {
+      mkind : '机型',
+      msubject: '主题',
+      location: '地区',
+    } ;
+
+    return name = ms[m] ;
+  }
+
+
+  _renderCHeader(m){
+    let title = '热门' + this._getCatMName(m) + '机友会' ;
+    return (<LCTitle navigator={this.props.navigator} title={title} style={{marginTop:0}} />) ;
+  }
+
+  _renderCFooter(m){
+    return (<TouchableHighlight onPress={this._onPressMoreCat.bind(this,m)} style={styles.btnMore} underlayColor="#ccc">
+      <Text allowFontScaling={false} style={styles.btnMoreText}>更多{this._getCatMName(m)}机友会=></Text>
+    </TouchableHighlight>) ;
+  }
+
   render(){
     if(this.state.holdOn) return this._getLoadingView() ;
 
     return (
-        <LCTimelineList
-          navigator={this.props.navigator}
-          
-          doUpdate={this.state.doUpdateTimelineList}
-          updateCallback={(js)=>this._updateRefreshState({doUpdateTimelineList:false})}
-          scrollsToTop={this.state.scrollsToTop}
-
-          loadMore={true}
-          enableEmptySections={true}
-          pageSize={3}
-
-          catId={this.state.cat.id}
-          orderId='last'
-
+        <ScrollView
+          scrollsToTop={true}
+          style={styles.backgroundGray}
           refreshControl={
             <RefreshControl
               refreshing={this.state.refreshing}
@@ -91,7 +107,32 @@ export default class CatDetailTimelinePage extends Component {
               colors={['#ff6600', '#00ff66', '#0000ff']}
               progressBackgroundColor="#ff6600"
             />}
-        />
+        >
+          <LCCatHots
+            navigator={this.props.navigator}
+            
+            mkind={12}
+            msubject={8}
+            location={4}
+
+            doUpdate={this.state.doUpdateCatHots}
+            updateCallback={(js)=>this._updateRefreshState({doUpdateCatHots:false})}
+
+
+            mkindHeader={this._renderCHeader('mkind')}
+            msubjectHeader={this._renderCHeader('msubject')}
+            locationHeader={this._renderCHeader('location')}
+
+
+            mkindFooter={this._renderCFooter('mkind')}
+            msubjectFooter={this._renderCFooter('msubject')}
+            locationFooter={this._renderCFooter('location')}
+
+            itemCatProps={{styleId:1,style:styles.catItem}}
+            style={styles.catListWrap}
+            groupStyle={styles.catListGroupWrap} />
+
+        </ScrollView>
     ) ;
   }
 }
@@ -111,4 +152,30 @@ const styles = StyleSheet.create({
     justifyContent:'center',
     flexDirection:'row'
   },
+
+  catListWrap:{
+    backgroundColor:'#efefef',
+    flex:1,
+  },
+  catListGroupWrap:{
+    flexDirection:'row',
+    flexWrap: 'wrap',
+    backgroundColor:'#fff',
+    flex:1,
+  },
+  catItem:{
+
+  },
+  btnMore:{
+    height:45,
+    alignItems:'center',
+    justifyContent:'center',
+    backgroundColor:'#fff',
+    flex:1,
+    marginBottom:15,
+  },
+  btnMoreText:{
+    color:'#516783',
+  }
+
 }) ;

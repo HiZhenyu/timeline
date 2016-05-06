@@ -228,7 +228,7 @@ export default class LCTimelineList extends Component {
   }
 
   _renderRow(timeline, sectionID, rowID){
-    return (<LCTimelineItem pressButton={true} key={timeline.id} style={[styles.timelineItem]} timeline={timeline} />) ;
+    return (<LCTimelineItem navigator={this.props.navigator} pressButton={true} key={timeline.id} style={[styles.timelineItem]} timeline={timeline} />) ;
   }
 
   scrollTo(...args){

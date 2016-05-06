@@ -241,7 +241,7 @@ export default class LCCatMmberList extends Component {
     if(this.props.itemStyleId == '1'){
       let itemStyle = [] ;
       if(this.props.itemStyle) itemStyle.push(this.props.itemStyle) ;
-      return (<LCUser key={item.id} style={itemStyle} user={item.user} {...this.props.itemUserProps} />) ;
+      return (<LCUser navigator={this.props.navigator} key={item.id} style={itemStyle} user={item.user} {...this.props.itemUserProps} />) ;
     }
 
     //使用完全样式
@@ -258,7 +258,7 @@ export default class LCCatMmberList extends Component {
 
     return (
       <View style={itemStyle}>
-        <LCUser key={item.id} style={styles.itemUser} user={item.user} {...this.props.itemUserProps} />
+        <LCUser navigator={this.props.navigator} key={item.id} style={styles.itemUser} user={item.user} {...this.props.itemUserProps} />
         <View style={styles.itemTime}><Text style={styles.itemTimeText} allowFontScaling={false}>{item.create_time}</Text></View>
         {tplTitles}
       </View>) ;
@@ -274,7 +274,7 @@ export default class LCCatMmberList extends Component {
 
     let titleMemberSum = '本会机友' + (this.state.sum ? '(' + this.state.sum + ')' : '') ;
 
-    const header = this.props.renderHeader ? this.props.renderHeader() : <LCTitle title={titleMemberSum} /> ;
+    const header = this.props.renderHeader ? this.props.renderHeader() : <LCTitle navigator={this.props.navigator} title={titleMemberSum} /> ;
     const footer = this.props.renderFooter ? this.props.renderFooter() : null ;
 
     let tpls = [] ;

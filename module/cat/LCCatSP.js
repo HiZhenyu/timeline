@@ -130,8 +130,8 @@ export default class LCCatSP extends Component {
               </Text>
             </View>
             <View style={styles.ops}>
-              <LCCatSignBtn style={styles.opsBtnl} cat={this.state.cat} />
-              <LCCatJoinBtn style={styles.opsBtnr} cat={this.state.cat} />
+              <LCCatSignBtn navigator={this.props.navigator} style={styles.opsBtnl} cat={this.state.cat} />
+              <LCCatJoinBtn navigator={this.props.navigator} style={styles.opsBtnr} cat={this.state.cat} />
             </View>
           </View>
         </View>

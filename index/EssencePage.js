@@ -65,7 +65,7 @@ export default class EssencePage extends Component {
 
     return (
       <LCTimelineList
-
+          navigator={this.props.navigator}
           ref={view=>this._scrollView=view}
           doUpdate={this.state.doUpdateTimlineList}
           updateCallback={(js)=>this._updateRefreshState({doUpdateTimlineList:false})}

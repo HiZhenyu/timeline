@@ -39,7 +39,7 @@ export default class LCDigs extends Component {
     for(var i=0;i<digs.length;i++){
       if(i > this.maxDigShow) break ;
       var adig = digs[i] ;
-      var atpl = (<LCUser style={styles.itemText} user={adig.user} key={i+'-'+adig.user.uid} styleId={2} />) ;
+      var atpl = (<LCUser navigator={this.props.navigator} style={styles.itemText} user={adig.user} key={i+'-'+adig.user.uid} styleId={2} />) ;
 
       if(i < digs.length -1 && i < this.maxDigShow)  digTpl.push(<Text key={i} allowFontScaling={false}>{atpl}<Text style={styles.itemText} allowFontScaling={false}>、</Text></Text>) ;
       else digTpl.push(atpl) ;

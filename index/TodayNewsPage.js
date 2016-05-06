@@ -72,12 +72,13 @@ export default class TodayNewsPage extends Component {
 
     return (
       <LCTimelineList
+          navigator={this.props.navigator}
           renderHeader={() => {
             return (<View>
-              <LCFocusImages doUpdate={this.state.doUpdateSlideImages} updateCallback={(js)=>this._updateRefreshState({doUpdateSlideImages:false})} />
-              <LCTitle title="我的机友会" />
-              <LCUserCats uid={online.uid} doUpdate={this.state.doUpdateUserCats} updateCallback={(js)=>this._updateRefreshState({doUpdateUserCats:false})} />
-              <LCTitle title="机友们的动态" />
+              <LCFocusImages navigator={this.props.navigator} doUpdate={this.state.doUpdateSlideImages} updateCallback={(js)=>this._updateRefreshState({doUpdateSlideImages:false})} />
+              <LCTitle navigator={this.props.navigator} title="我的机友会" />
+              <LCUserCats navigator={this.props.navigator} uid={online.uid} doUpdate={this.state.doUpdateUserCats} updateCallback={(js)=>this._updateRefreshState({doUpdateUserCats:false})} />
+              <LCTitle navigator={this.props.navigator} title="机友们的动态" />
             </View>)
           }}
 

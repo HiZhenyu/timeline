@@ -33,7 +33,7 @@ export default class IndexPage extends Component {
       }
     }) ;
 
-    if(this.props.navigator) global.appNavigator = this.props.navigator ;
+    if(this.props.navigator) this.props.navigator = this.props.navigator ;
   }
 
   _onPageSelected(event){
@@ -71,10 +71,10 @@ export default class IndexPage extends Component {
           />}
           onPageSelected={this._onPageSelected.bind(this)}
         >
-          <View><TodayNewsPage holdOn={this.state.holdOns.TodayNewsPage} scrollsToTop={this.state.scrollsToTops.TodayNewsPage} /></View>
-          <View><FollowFeedPage holdOn={this.state.holdOns.FollowFeedPage}  scrollsToTop={this.state.scrollsToTops.FollowFeedPage} /></View>
-          <View><EssencePage holdOn={this.state.holdOns.EssencePage} scrollsToTop={this.state.scrollsToTops.EssencePage} /></View>
-          <View><AskIndexPage /></View>
+          <View><TodayNewsPage navigator={this.props.navigator} holdOn={this.state.holdOns.TodayNewsPage} scrollsToTop={this.state.scrollsToTops.TodayNewsPage} /></View>
+          <View><FollowFeedPage navigator={this.props.navigator} holdOn={this.state.holdOns.FollowFeedPage}  scrollsToTop={this.state.scrollsToTops.FollowFeedPage} /></View>
+          <View><EssencePage navigator={this.props.navigator} holdOn={this.state.holdOns.EssencePage} scrollsToTop={this.state.scrollsToTops.EssencePage} /></View>
+          <View><AskIndexPage navigator={this.props.navigator} /></View>
 
         </IndicatorViewPager>
     ) ;

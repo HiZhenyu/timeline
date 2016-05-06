@@ -73,10 +73,12 @@ export default class TimelinePage extends Component {
     return (
       <View style={{flex:1}}>
         <LCCommentList
+            navigator={this.props.navigator}
             timelineId={timeline.id}
             renderHeader={() => {
               return (
                 <LCTimelineDetail
+                  navigator={this.props.navigator}
                   style={{borderBottomWidth:1,borderBottomColor:'#ddd'}}
                   timeline={timeline}
                   doUpdate={this.state.doUpdateTimelineDetail}

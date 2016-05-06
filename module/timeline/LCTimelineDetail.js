@@ -108,7 +108,7 @@ export default class LCTimelineDetail extends Component {
     let digsTpl = null ;
 
     if(timeline.digs.list.length > 0){
-      let digsUserTpls = timeline.digs.list.map((adig,i)=><LCUser style={styles.digUser} hiddenName={true} key={i} styleId={1} user={adig.user} />) ;
+      let digsUserTpls = timeline.digs.list.map((adig,i)=><LCUser navigator={this.props.navigator} style={styles.digUser} hiddenName={true} key={i} styleId={1} user={adig.user} />) ;
 
       digsTpl = (
         <View style={styles.digsWrap}>
@@ -126,10 +126,10 @@ export default class LCTimelineDetail extends Component {
 
     return (
       <View style={style}>
-        <LCTimelineItem style={styles.timelineDetail} timeline={timeline} hiddenCommentsAndDigs={true} hiddenMCommentAndMdig={true} />
+        <LCTimelineItem navigator={this.props.navigator} style={styles.timelineDetail} timeline={timeline} hiddenCommentsAndDigs={true} hiddenMCommentAndMdig={true} />
 
         <View style={styles.mdig}>
-          <LCMDig digImageStyle={{width:25,height:25,marginRight:5}} digTextStyle={{fontSize:16}} timelineId={timeline.id} isum={timeline.dig.sum} />
+          <LCMDig navigator={this.props.navigator} digImageStyle={{width:25,height:25,marginRight:5}} digTextStyle={{fontSize:16}} timelineId={timeline.id} isum={timeline.dig.sum} />
         </View>
         {timeline.digs.list.length > 0 ?
           <View style={styles.drline}>

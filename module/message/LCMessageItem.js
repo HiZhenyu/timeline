@@ -25,7 +25,7 @@ export default class LCMessageItem extends Component {
     return (
       <View style={[styles.item,styles.flexRow]}>
         <View style={styles.message}>
-          <LCUser user={user} styleId={1} />
+          <LCUser navigator={this.props.navigator} user={user} styleId={1} />
           <View style={styles.messageTextView}>
             <Text style={styles.messageText}>回复hi阵雨: 好的，面包会有的，也会有的，哈哈。</Text>
           </View>

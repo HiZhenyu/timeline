@@ -91,11 +91,11 @@ export default class CatDetailMainPage extends Component {
           />}
           onPageSelected={this._onPageSelected.bind(this)}
         >
-          <View><CatDetailIndexPage cat={cat} holdOn={this.state.holdOns.CatDetailIndexPage} scrollsToTop={this.state.scrollsToTops.CatDetailIndexPage} mainView={this} /></View>
-          <View><CatDetailTimelinePage cat={cat} holdOn={this.state.holdOns.CatDetailTimelinePage} scrollsToTop={this.state.scrollsToTops.CatDetailTimelinePage} mainView={this} /></View>
-          <View><CatDetailEssencePage cat={cat} holdOn={this.state.holdOns.CatDetailEventPage} scrollsToTop={this.state.scrollsToTops.CatDetailEventPage} mainView={this} /></View>
-          <View><CatDetailEssencePage cat={cat} holdOn={this.state.holdOns.CatDetailEssencePage} scrollsToTop={this.state.scrollsToTops.CatDetailEssencePage} mainView={this} /></View>
-          <View><CatDetailMemberPage cat={cat} holdOn={this.state.holdOns.CatDetailMemberPage} scrollsToTop={this.state.scrollsToTops.CatDetailMemberPage} mainView={this} /></View>
+          <View><CatDetailIndexPage navigator={this.props.navigator} cat={cat} holdOn={this.state.holdOns.CatDetailIndexPage} scrollsToTop={this.state.scrollsToTops.CatDetailIndexPage} mainView={this} /></View>
+          <View><CatDetailTimelinePage navigator={this.props.navigator} cat={cat} holdOn={this.state.holdOns.CatDetailTimelinePage} scrollsToTop={this.state.scrollsToTops.CatDetailTimelinePage} mainView={this} /></View>
+          <View><CatDetailEssencePage navigator={this.props.navigator} cat={cat} holdOn={this.state.holdOns.CatDetailEventPage} scrollsToTop={this.state.scrollsToTops.CatDetailEventPage} mainView={this} /></View>
+          <View><CatDetailEssencePage navigator={this.props.navigator} cat={cat} holdOn={this.state.holdOns.CatDetailEssencePage} scrollsToTop={this.state.scrollsToTops.CatDetailEssencePage} mainView={this} /></View>
+          <View><CatDetailMemberPage navigator={this.props.navigator} cat={cat} holdOn={this.state.holdOns.CatDetailMemberPage} scrollsToTop={this.state.scrollsToTops.CatDetailMemberPage} mainView={this} /></View>
         </IndicatorViewPager>
     ) ;
   }

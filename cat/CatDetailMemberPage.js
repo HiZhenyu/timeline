@@ -7,7 +7,6 @@ import React, {
 } from 'react-native';
 
 
-import LCTitle from './../module/pub/LCTitle' ;
 import LCCatMemberList from './../module/cat/LCCatMemberList' ;
 import GiftedSpinner from 'react-native-gifted-spinner' ;
 
@@ -18,10 +17,10 @@ export default class CatDetailMemberPage extends Component {
     //需要下拉更新的锁们
     this.doUpdateStates = ['doUpdateCatMemberList'] ;
     this.state = {
+      cat: this.props.cat ,
       refreshing:false,
       scrollsToTop:!!this.props.scrollsToTop,
       holdOn:!!this.props.holdOn,
-      cat:this.props.cat ,
     } ;
 
     for(var i=0;i<this.doUpdateStates.length;i++) this.state[this.doUpdateStates[i]] = false ;
@@ -67,6 +66,8 @@ export default class CatDetailMemberPage extends Component {
 
     return (
       <LCCatMemberList
+          navigator={this.props.navigator}
+
           cat={cat}
           ref={view=>this._scrollView=view}
           doUpdate={this.state.doUpdateCatMemberList}

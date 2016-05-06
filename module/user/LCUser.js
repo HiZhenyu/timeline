@@ -26,13 +26,13 @@ export default class LCUser extends Component {
   }
 
   _onPress(){
-    if(!global.appNavigator) return ;
+    if(!this.props.navigator) return ;
     if(!this.state.user || !this.state.user.uid || this.state.user.uid == '0') return ;
 
     var props = {user:this.state.user} ;
 
     //使用Navigation方案
-    global.appNavigator.push({
+    this.props.navigator.push({
       screen: 'user.UserHomePage',
       passProps: props,
       animated: true,

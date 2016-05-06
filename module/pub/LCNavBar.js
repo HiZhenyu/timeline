@@ -16,8 +16,8 @@ export default class LCNavBar extends Component {
   _onPress(){
     if(this.props.navigator) return this.props.navigator.pop() ;
 
-    if(!global.appNavigator) return ;
-    return global.appNavigator.pop() ;
+    if(!this.props.navigator) return ;
+    return this.props.navigator.pop() ;
   }
 
   _onPressStatusBar(){

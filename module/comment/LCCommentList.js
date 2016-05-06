@@ -223,7 +223,7 @@ export default class LCCommentList extends Component {
     if(this.props.itemStyle) style.push(this.props.itemStyle) ;
 
     let lineStyle = rowID == 0 ? {borderTopWidth:0} : null ;
-    return (<LCCommentItem key={comment.id} style={style} lineStyle={lineStyle} comment={comment} />) ;
+    return (<LCCommentItem navigator={this.props.navigator} key={comment.id} style={style} lineStyle={lineStyle} comment={comment} />) ;
   }
 
   scrollTo(...args){

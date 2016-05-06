@@ -120,7 +120,7 @@ export default class LCCatHots extends Component {
   }
 
   _renderRow(item, sectionID, rowID){
-    return (<LCCatItem key={item.id} style={[styles.catItem]} cat={item} {...this.props.itemCatProps} />) ;
+    return (<LCCatItem navigator={this.props.navigator} key={item.id} style={[styles.catItem]} cat={item} {...this.props.itemCatProps} />) ;
   }
 
   _getLoadingView(style){

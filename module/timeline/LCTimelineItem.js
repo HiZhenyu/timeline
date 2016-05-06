@@ -35,11 +35,11 @@ export default class LCTimelineItem extends Component {
   }
 
   _onPress(){
-    if(!global.appNavigator) return ;
+    if(!this.props.navigator) return ;
     var props = {timeline:this.state.timeline} ;
 
     //使用Navigation方案
-    global.appNavigator.push({
+    this.props.navigator.push({
       screen: 'timeline.TimelinePage',
       title: props.timeline.cat.name,
       backButtonTitle: '返回',
@@ -64,11 +64,11 @@ export default class LCTimelineItem extends Component {
 
     let timelineText = timeline.content ? timeline.content : timeline.title ;
 
-    let tplSubject = timeline.subject && timeline.subject.id ? (<LCSubjectItem subject={timeline.subject} />) : null ;
+    let tplSubject = timeline.subject && timeline.subject.id ? (<LCSubjectItem navigator={this.props.navigator} subject={timeline.subject} />) : null ;
     let tplTitle = timelineText ? <Text style={styles.timelineText} allowFontScaling={false}>{tplSubject}{global.getEmotionContents(timelineText)}</Text> : false ;
-    let tplImages = images && images.sum ? <LCTimelineImages oneImageInCenter={true} images={images.list} /> : false ;
-    let tplDigs = digs && digs.list && digs.list.length > 0  ? <LCDigs list={digs.list} sum={digs.sum} style={styles.digs} /> : false ;
-    let tplComments = comments && comments.list && comments.list.length > 0 ? <LCComments timeline={timeline} list={comments.list} sum={comments.sum}  style={styles.comments} /> : false ;
+    let tplImages = images && images.sum ? <LCTimelineImages navigator={this.props.navigator} oneImageInCenter={true} images={images.list} /> : false ;
+    let tplDigs = digs && digs.list && digs.list.length > 0  ? <LCDigs navigator={this.props.navigator} list={digs.list} sum={digs.sum} style={styles.digs} /> : false ;
+    let tplComments = comments && comments.list && comments.list.length > 0 ? <LCComments navigator={this.props.navigator} timeline={timeline} list={comments.list} sum={comments.sum}  style={styles.comments} /> : false ;
 
     let tplDCLine = tplDigs && tplComments ? <View style={styles.dcline} /> : false ;
 
@@ -92,11 +92,11 @@ export default class LCTimelineItem extends Component {
 
     let tplOps = (
       <View style={[styles.flexRow,styles.timelineOps,styles.flex,styles.plr10]}>
-        <LCMComment timelineId={timeline.id} isum={timeline.comment.sum} />
+        <LCMComment navigator={this.props.navigator} timelineId={timeline.id} isum={timeline.comment.sum} />
         <View style={{marginLeft:20}} />
-        <LCMDig timelineId={timeline.id} showDigText={true} did={timeline.dig.did} isum={timeline.dig.sum} timelineObj={this} />
+        <LCMDig navigator={this.props.navigator} timelineId={timeline.id} showDigText={true} did={timeline.dig.did} isum={timeline.dig.sum} timelineObj={this} />
         <View style={styles.flex} />
-        <LCMDrop timelineId={timeline.id} />
+        <LCMDrop navigator={this.props.navigator} timelineId={timeline.id} />
       </View>) ;
 
 
@@ -113,7 +113,7 @@ export default class LCTimelineItem extends Component {
     return (
       <View style={style} key={timeline.id}>
         <View style={[styles.flexRow,styles.plr10]}>
-          <View style={styles.userWrap}><LCUser user={timeline.user} styleId={1} style={styles.user} /></View>
+          <View style={styles.userWrap}><LCUser navigator={this.props.navigator} user={timeline.user} styleId={1} style={styles.user} /></View>
           <View style={styles.postTime}>
             <Text style={styles.postTimeText} allowFontScaling={false}>{timeline.create_time}</Text>
           </View>
@@ -123,7 +123,7 @@ export default class LCTimelineItem extends Component {
             <Text style={styles.timelineTitle} allowFontScaling={false}>{timeline.title}</Text> : null
           }
           {tplContents}
-          <LCCatItem cat={timeline.cat} style={[styles.catLine,styles.plr10]} styleId={2} />
+          <LCCatItem navigator={this.props.navigator} cat={timeline.cat} style={[styles.catLine,styles.plr10]} styleId={2} />
           {tplOps}
         </View>
         {tplDCs}

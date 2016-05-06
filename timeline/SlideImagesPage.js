@@ -45,7 +45,7 @@ export default class SlideImagesPage extends Component {
   render(){
     let views = this.state.images.map((image,i)=>{
       return (
-        <LCSlideImageItem holdOn={this.state.holdOns[i]} key={i} image={image} />
+        <LCSlideImageItem navigator={this.props.navigator} holdOn={this.state.holdOns[i]} key={i} image={image} />
       ) ;
     }) ;
 

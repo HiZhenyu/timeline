@@ -22,25 +22,44 @@ export default class PubIndexPage extends Component {
   }
 
   componentDidMount(){
-    console.log(333);
+
   }
 
   _onPressMoreCat(){
+    if(!this.props.navigator) return ;
+    var props = {} ;
 
+    //使用Navigation方案
+    this.props.navigator.push({
+      screen: 'cat.CatHotPage',
+      passProps: props,
+      animated: true,
+      title: '热门机友会',
+      backButtonTitle: '返回',
+      backButtonHidden: false,
+      navigatorStyle: {
+        tabBarHidden: true,
+        navBarBackgroundColor: '#f9f9f9',
+        navBarBackgroundColor: '#f9f9f9',
+        navBarButtonColor: '#555',
+      },
+      navigatorButtons: {}
+    });
   }
 
   render(){
     return (
         <ScrollView style={[styles.flex,styles.backgroundGray]}>
-          <LCTitle title="找找找" />
-          <LCExFindMore />
-          <LCTitle title="热门机友会" />
+          <LCTitle navigator={this.props.navigator} title="找找找" style={{marginTop:0}} />
+          <LCExFindMore navigator={this.props.navigator} />
+          <LCTitle navigator={this.props.navigator} title="热门机友会" />
           <LCCatHots
+            navigator={this.props.navigator}
             mkind={8}
             msubject={4}
             location={4}
             locationFooter={
-              <TouchableHighlight onPress={this._onPressMoreCat} style={styles.btnMore} underlayColor="#ccc">
+              <TouchableHighlight onPress={this._onPressMoreCat.bind(this)} style={styles.btnMore} underlayColor="#ccc">
                 <Text allowFontScaling={false} style={styles.btnMoreText}>更多热门机友会=></Text>
               </TouchableHighlight>
             }
@@ -50,8 +69,8 @@ export default class PubIndexPage extends Component {
 
 
 
-          <LCTitle title="更多精彩尽在机友会" />
-          <LCExSuperb />
+          <LCTitle navigator={this.props.navigator} title="更多精彩尽在机友会" />
+          <LCExSuperb navigator={this.props.navigator} />
         </ScrollView>
     ) ;
   }

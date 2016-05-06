@@ -117,7 +117,7 @@ export default class LCUserMedals extends Component {
     var tpls = [] ;
     for(var i=0;i<this.state.list.length;i++){
       var medal = this.state.list[i] ;
-      tpls.push(<LCMedalItem medal={medal} key={medal.id} />) ;
+      tpls.push(<LCMedalItem navigator={this.props.navigator} medal={medal} key={medal.id} />) ;
     }
 
 		return <View style={styles.hlist}>{tpls}</View>

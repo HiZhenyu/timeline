@@ -109,7 +109,7 @@ export default class PostTimelinePage extends Component {
     return (
       <ScrollView style={[styles.backgroundGray,{marginTop:130}]}>
 
-        <LCSelectPhotosFromLibrary />
+        <LCSelectPhotosFromLibrary navigator={this.props.navigator} />
         <TouchableHighlight onPress={this._press.bind(this)}>
         <Text>PostTimelinePage</Text>
         </TouchableHighlight>

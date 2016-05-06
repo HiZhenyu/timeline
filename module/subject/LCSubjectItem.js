@@ -16,10 +16,10 @@ export default class LCSubject extends Component {
   }
 
   _onPress(){
-    if(!global.appNavigator) return ;
+    if(!this.props.navigator) return ;
 
     let props = {} ;
-    global.appNavigator.push({
+    this.props.navigator.push({
         name: 'SubjectPage',
         component: SubjectPage,
         params: props,

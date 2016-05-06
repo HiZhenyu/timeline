@@ -132,7 +132,7 @@ export default class LCUserCats extends Component {
     for(var i=0;i<this.state.list.length;i++){
       var cat = this.state.list[i] ;
       var borderStyle = i%4 == 3 ? {borderRightWidth:0} : {} ;
-      tpls.push(<LCCatItem cat={cat} style={borderStyle} uid={this.props.uid} key={cat.id} styleId={1} />) ;
+      tpls.push(<LCCatItem navigator={this.props.navigator} cat={cat} style={borderStyle} uid={this.props.uid} key={cat.id} styleId={1} />) ;
     }
 
 		return <View style={styles.hlist}>{tpls}</View>

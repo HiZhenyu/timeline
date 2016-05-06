@@ -103,6 +103,7 @@ export default class CatDetailIndexPage extends Component {
           />}
       >
         <LCCatSP
+          navigator={this.props.navigator}
           cat={cat}
           doUpdate={this.state.doUpdateCatSP}
           updateCallback={(js)=>this._updateRefreshState({doUpdateCatSP:false})}
@@ -110,6 +111,8 @@ export default class CatDetailIndexPage extends Component {
 
         <View style={styles.flex}>
           <LCCatMemberList
+            navigator={this.props.navigator}
+
             ref={(ref)=>this.membersView=ref}
             style={styles.members}
 
@@ -130,6 +133,8 @@ export default class CatDetailIndexPage extends Component {
 
         <LCTitle title="本会管理" />
         <LCCatChairmans
+          navigator={this.props.navigator}
+
           cat={cat}
           doUpdate={this.state.doUpdateChairmans}
           updateCallback={(js)=>this._updateRefreshState({doUpdateChairmans:false})}
@@ -137,6 +142,8 @@ export default class CatDetailIndexPage extends Component {
 
         <LCTitle title="本会动态" />
         <LCTimelineList
+          navigator={this.props.navigator}
+          
           catId={cat.id}
           ps={10}
           doUpdate={this.state.doUpdateTimelines}

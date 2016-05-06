@@ -19,12 +19,12 @@ export default class LCCatItem extends Component {
 	}
 
   _onPress(){
-    if(!global.appNavigator) return ;
+    if(!this.props.navigator) return ;
     if(!this.state.cat || !this.state.cat.id || this.state.cat.id == '0') return ;
 
     var props = {cat:this.state.cat} ;
 
-    global.appNavigator.push({
+    this.props.navigator.push({
       screen: 'cat.CatDetailMainPage',
       passProps: props,
       animated: true,

@@ -54,6 +54,7 @@ export default class UserTimelinePage extends Component {
     return (
       <View style={{flex:1}}>
         <LCTimelineList
+            navigator={this.props.navigator}
             uid={user.uid}
             list={this.timelines}
             doUpdate={this.state.doUpdateTimlineList}

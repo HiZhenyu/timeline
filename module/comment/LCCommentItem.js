@@ -27,7 +27,7 @@ export default class LCCommentItem extends Component {
     let pwidth = React.Dimensions.get('window').width - 60 ;
 
     let tplTitle = commentText ? <Text style={styles.commentText} allowFontScaling={false}>{global.getEmotionContents(commentText)}</Text> : false ;
-    let tplImages = images && images.sum ? <LCTimelineImages oneImageCenter={false} pwidth={pwidth} images={images.list} /> : false ;
+    let tplImages = images && images.sum ? <LCTimelineImages navigator={this.props.navigator} oneImageCenter={false} pwidth={pwidth} images={images.list} /> : false ;
 
     let style = [styles.item,styles.flex] ;
     if(this.props.style) style.push(this.props.style) ;
@@ -39,7 +39,7 @@ export default class LCCommentItem extends Component {
       <View style={style} key={comment.id}>
         <View style={lineStyle} />
         <View style={[styles.flexRow]}>
-          <View style={styles.userWrap}><LCUser userNameStyle={styles.userNameStyle} user={comment.user} styleId={1} /></View>
+          <View style={styles.userWrap}><LCUser navigator={this.props.navigator} userNameStyle={styles.userNameStyle} user={comment.user} styleId={1} /></View>
           <View style={styles.postTime}>
             <Text style={styles.postTimeText} allowFontScaling={false}>{comment.create_time}</Text>
           </View>

@@ -62,14 +62,15 @@ export default class MyHomePage extends Component {
         }
       >
         <LCOnlineSP
+          navigator={this.props.navigator}
           doUpdate={this.state.doOnlineSP}
           holdOn={true}
           updateCallback={(js)=>this._updateRefreshState({doOnlineSP:false})}
         />
 
-        <LCSline style={styles.mt10} title='我的机友会' icon={require('./../images/icon_homeji.png')}  />
-        <LCSline style={styles.mt10} title='我的订单' icon={require('./../images/icon_msg.png')} />
-        <LCSline style={styles.mt10} lines={[
+        <LCSline navigator={this.props.navigator} style={styles.mt10} title='我的机友会' icon={require('./../images/icon_homeji.png')}  />
+        <LCSline navigator={this.props.navigator} style={styles.mt10} title='我的订单' icon={require('./../images/icon_msg.png')} />
+        <LCSline navigator={this.props.navigator} style={styles.mt10} lines={[
           {title:'金币纪录',icon:require('./../images/icon_log.png')},
           {title:'获奖纪录',icon:require('./../images/icon_log.png')},
         ]} />

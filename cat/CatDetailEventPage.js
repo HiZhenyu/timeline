@@ -7,7 +7,6 @@ import React, {
 } from 'react-native';
 
 
-import LCTitle from './../module/pub/LCTitle' ;
 import LCTimelineList from './../module/timeline/LCTimelineList' ;
 import GiftedSpinner from 'react-native-gifted-spinner' ;
 
@@ -18,6 +17,7 @@ export default class CatDetailEventPage extends Component {
     //需要下拉更新的锁们
     this.doUpdateStates = ['doUpdateTimlineList'] ;
     this.state = {
+      cat: this.props.cat ,
       refreshing:false,
       scrollsToTop:!!this.props.scrollsToTop,
       holdOn:!!this.props.holdOn,
@@ -65,12 +65,14 @@ export default class CatDetailEventPage extends Component {
 
     return (
       <LCTimelineList
+          navigator={this.props.navigator}
 
           ref={view=>this._scrollView=view}
           doUpdate={this.state.doUpdateTimlineList}
           updateCallback={(js)=>this._updateRefreshState({doUpdateTimlineList:false})}
 
-          essence={1}
+          event={1}
+          catId={this.state.cat.id}
 
           loadMore={true}
           enableEmptySections={true}

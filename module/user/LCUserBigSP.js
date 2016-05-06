@@ -116,6 +116,7 @@ export default class LCUserBigSP extends Component {
         <View style={styles.userIntro}>
           <View style={styles.userIntroL}>
             <LCMFollow
+              navigator={this.props.navigator}
               user={user}
               doUpdate={this.state.doUserFollow}
               updateCallback={(js)=>this.setState({doUserFollow:false})}

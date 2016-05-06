@@ -13,10 +13,12 @@ import PostTimelinePage from './post/PostTimelinePage' ;
 import CatDetailMainPage from './cat/CatDetailMainPage' ;
 import CatDetailIndexPage from './cat/CatDetailIndexPage' ;
 import CatListPage from './cat/CatListPage' ;
+import CatHotPage from './cat/CatHotPage' ;
 
 import LoginPage from './account/LoginPage' ;
 import RegisterPage from './account/RegisterPage' ;
 import PasswordPage from './account/PasswordPage' ;
+
 
 
 
@@ -33,6 +35,7 @@ export function registerScreens() {
   Navigation.registerComponent('cat.CatDetailMainPage', () => CatDetailMainPage);
   Navigation.registerComponent('cat.CatDetailIndexPage', () => CatDetailIndexPage);
   Navigation.registerComponent('cat.CatListPage', () => CatListPage);
+  Navigation.registerComponent('cat.CatHotPage', () => CatHotPage);
 
   Navigation.registerComponent('account.LoginPage', () => LoginPage);
   Navigation.registerComponent('account.RegisterPage', () => RegisterPage);

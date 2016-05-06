@@ -117,7 +117,7 @@ export default class LCCatChairmans extends Component {
 
   _renderRow(item){
     return (<View style={styles.chairmanItem} key={item.id}>
-      <LCUser style={styles.chairmanItemUser} hiddenName={true} styleId={1} user={item.user} />
+      <LCUser navigator={this.props.navigator} style={styles.chairmanItemUser} hiddenName={true} styleId={1} user={item.user} />
       <Text style={styles.labelText} allowFontScaling={false}>{item.title}</Text>
       <Text style={styles.chairmanNameText} numberOfLines={1} allowFontScaling={false}>{item.user.name}</Text>
     </View>) ;
