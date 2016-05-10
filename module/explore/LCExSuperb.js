@@ -19,7 +19,26 @@ export default class LCExSuperb extends Component {
 
 
   _onPress(item){
-    console.log(item);
+
+    if(!this.props.navigator) return ;
+    var props = {} ;
+
+    //使用Navigation方案
+    this.props.navigator.push({
+      screen: item.id ,
+      passProps: props,
+      animated: true,
+      title: item.name ,
+      backButtonTitle: '返回',
+      backButtonHidden: false,
+      navigatorStyle: {
+        tabBarHidden: true,
+        navBarBackgroundColor: '#f9f9f9',
+        navBarBackgroundColor: '#f9f9f9',
+        navBarButtonColor: '#555',
+      },
+      navigatorButtons: {}
+    }) ;
   }
 
 	render() {
@@ -35,7 +54,7 @@ export default class LCExSuperb extends Component {
         icon:require('./../../images/icon_s_task.png')
       },
       {
-        id:'shop',
+        id:'shop.ShopIndexPage',
         name:'金币商城',
         icon:require('./../../images/icon_s_shop.png')
       },
@@ -55,7 +74,7 @@ export default class LCExSuperb extends Component {
         icon:require('./../../images/icon_s_invite.png')
       },
       {
-        id:'subject',
+        id:'subject.SubjectIndexPage',
         name:'活动与话题',
         icon:require('./../../images/icon_s_subject.png')
       },

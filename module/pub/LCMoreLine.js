@@ -38,12 +38,11 @@ const styles = StyleSheet.create({
     paddingLeft:20,
     paddingRight:20,
     borderRadius:4,
-    height:25,
+    height:30,
+    justifyContent:'center'
   },
   btnMoreText:{
     textAlign:'center',
     color:'#fff',
-    fontSize:13,
-    lineHeight:15
   }
 }) ;

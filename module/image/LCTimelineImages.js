@@ -36,32 +36,33 @@ export default class LCTimelineImages extends Component {
   }
 
   render(){
-    var images = this.state.images ;
+    let images = this.state.images ;
     if(!images) images = [] ;
-    var imagesSize = images.length ;
+    let imagesSize = images.length ;
 
     let PWidth = this.props.pwidth ? this.props.pwidth : React.Dimensions.get('window').width ;
 
-    var tplImages = [] ;
-    for(var i=0;i<images.length;i++){
-      var aimg = images[i] ;
+    let wrapStyle = [styles.images,styles['images'+imagesSize]] ;
+    let tplImages = [] ;
+    for(let i=0;i<images.length;i++){
+      let aimg = images[i] ;
 
       if(aimg.thumb) aimg.thumb = global.getUploadURL(aimg.thumb) ;
       if(aimg.hdimg) aimg.hdimg = global.getUploadURL(aimg.hdimg) ;
       if(!aimg.hdimg) aimg.hdimg = aimg.thumb.replace('300x300','1024x1024').replace('600x600','1024x1024') ;
 
-      var astyle = [styles.image,{ width: (PWidth - 51)/3,height: (PWidth - 51)/3 }] ;
-      if(imagesSize == 4) astyle.push({paddingRight:(PWidth - 50)/3}) ;
+      let astyle = [styles.image,{ width: (PWidth - 51)/3,height: (PWidth - 51)/3 }] ;
+      if(imagesSize == 4) wrapStyle.push({paddingRight:(PWidth - 50)/3}) ;
 
       if(imagesSize == 1 && aimg.width && aimg.height){
-          var awidth = PWidth-20 ;
-          var amarginLeft = 0 ;
+          let awidth = PWidth-20 ;
+          let amarginLeft = 0 ;
           if(aimg.height*1 > aimg.width*1){
             awidth = (PWidth - 20)/(aimg.height/aimg.width) ;
             if(this.props.oneImageInCenter) amarginLeft = (PWidth - awidth - 20) / 2 ;
           }
 
-          var aheight = aimg.height / aimg.width  * awidth ;
+          let aheight = aimg.height / aimg.width  * awidth ;
           if(aheight > aimg.height && awidth > aimg.width){
             aheight = aimg.height*1 ;
             awidth = aimg.width*1 ;
@@ -72,6 +73,7 @@ export default class LCTimelineImages extends Component {
           astyle.push({width:awidth,height:aheight,margin:0,marginLeft:amarginLeft}) ;
       }
 
+
       tplImages.push((
         <TouchableOpacity key={i} onPress={this._onPress.bind(this,aimg,i)}>
           <Image style={astyle} source={{uri:aimg.thumb}} />
@@ -80,7 +82,7 @@ export default class LCTimelineImages extends Component {
     }
 
     return (
-      <View style={[styles.images,styles['images'+imagesSize]]}>
+      <View style={wrapStyle}>
         {tplImages}
       </View>
     ) ;
@@ -98,6 +100,7 @@ const styles = StyleSheet.create({
   image:{
     resizeMode:'cover',
     margin: 5,
+    backgroundColor: '#eee',
   } ,
 
 

@@ -139,7 +139,7 @@ export default class LCSelectPhotosFromLibrary extends Component {
         renderRow={this._renderRow.bind(this)}
         renderFooter={this._renderFooterSpinner.bind(this)}
         onEndReached={this._onEndReached.bind(this)}
-        contentContainerStyle={[styles.container]}
+        contentContainerStyle={this.props.style}
         dataSource={this.state.dataSource}
       />
     ) ;

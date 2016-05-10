@@ -79,7 +79,7 @@ export default class LCOnlineSP extends Component {
     var post = {} ;
 
     this.loading = true ;
-    global.v2iapi('online','detail',post,{
+    global.v2iapi('online/detail',post,{
       succ:(js)=>{
         this._doAssets(js) ;
         global.storage.save({key:this.storageKey,id:this._getStorageId(),rawData:js,expires:this.storageExpires}) ;

@@ -19,7 +19,7 @@ global.storage = new Storage({
 global.getOnline = (callback)=>{
   if(global.online) return global.online ;
 
-  global.v2iapi('online','',{},{
+  global.v2iapi('online',{},{
     succ:(js) => {
       global.online = js ;
       if(callback) callback() ;
@@ -35,9 +35,8 @@ global.getOnline = (callback)=>{
 } ;
 
 
-global.v2iapi = (p,a,post,handle) => {
-  var url = ['http://v2i.api.lmjx.net',p] ;
-  if(a) url.push(a) ;
+global.v2iapi = (urlPath,post,handle) => {
+  var url = ['http://v2i.api.lmjx.net',urlPath] ;
   url = url.join('/') ;
 
   if(!post) post = {} ;

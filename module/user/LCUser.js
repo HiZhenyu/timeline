@@ -29,7 +29,7 @@ export default class LCUser extends Component {
     if(!this.props.navigator) return ;
     if(!this.state.user || !this.state.user.uid || this.state.user.uid == '0') return ;
 
-    var props = {user:this.state.user} ;
+    let props = {user:this.state.user} ;
 
     //使用Navigation方案
     this.props.navigator.push({

@@ -151,7 +151,7 @@ export default class LCCatList extends Component {
     post.area_id = this.props.areaId ;
 
     this.loading = true ;
-    global.v2iapi('cat','list',post,{
+    global.v2iapi('cat/list',post,{
       succ:(ret)=>{
         if(ret.p == 1) global.storage.save({key:this.storageKey,id:this._getStorageId(),rawData:ret,expires:this.storageExpires}) ;
 
@@ -266,7 +266,7 @@ export default class LCCatList extends Component {
         renderRow={this._renderRow.bind(this)}
         renderFooter={this._renderFooter.bind(this)}
         onEndReached={this._onEndReached.bind(this)}
-        contentContainerStyle={[this.props.style]}
+        contentContainerStyle={this.props.style}
         onEndReachedThreshold={220}
         {...this.props}
       />

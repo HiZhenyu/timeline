@@ -8,101 +8,20 @@ import React, {
 } from 'react-native';
 
 import LCMFollow from './../op/LCMFollow' ;
+import LCDetail from './../LCDetail' ;
 
-export default class LCUserBigSP extends Component {
+export default class LCUserBigSP extends LCDetail {
 
   constructor(props) {
     super(props) ;
 
-    this.state = {
-      user : props.user ? props.user : {}
-    } ;
+    this.itemKey = 'user' ;
+    this.itemIdKey = 'uid' ;
 
-    this.storageKey = 'userdetail' ;
-    this.storageExpires = 86400*1000 ;
+    this.apiPath = 'user/detail' ;
   }
 
-  componentWillReceiveProps(nextProps){
-    if(!this.props.doUpdate && nextProps.doUpdate){
-      this.setState({doUserFollow:true}) ;
-      this._fetch(nextProps.updateCallback ? nextProps.updateCallback:null,true) ;
-    }
-    if(this.props.holdOn && !nextProps.holdOn) return this._doMount() ;
-  }
-
-  componentDidMount() {
-    if(this.props.holdOn) return null ;
-    return this._doMount() ;
-  }
-
-  componentWillUnmount() {
-    this.unmount = true ;
-  }
-
-  _doMount(){
-    return this._fetchDefault() ;
-  }
-
-  _getStorageId(){
-    return this.state.user.uid ;
-  }
-
-  //获取初始状态的
-  _fetchDefault(callback){
-    if(this.loading) return false ;
-    this.loading = true ;
-
-    global.storage.sync[this.storageKey] = ((params)=>{
-      this.loading = false ;
-      this._fetch(callback) ;
-    }).bind(this) ;
-
-    global.storage.load({
-        key: this.storageKey ,
-        id:this._getStorageId(),
-        autoSync: true,
-        syncInBackground: false,
-    }).then( ret => {
-      this._doAssets(ret) ;
-      this.loading = false ;
-      if(callback) callback(ret) ;
-    }).catch( err => {
-        this.loading = false ;
-
-        //没读取到
-        this._fetch(callback) ;
-    }) ;
-
-    return true;
-  }
-
-  //通过远程接口获取
-  _fetch(callback,clear){
-    if(this.loading) return false ;
-
-    var post = {} ;
-    post.uid = this.state.user.uid ;
-
-    this.loading = true ;
-    global.v2iapi('user','detail',post,{
-      succ:(js)=>{
-        this._doAssets(js) ;
-        global.storage.save({key:this.storageKey,id:this._getStorageId(),rawData:js,expires:this.storageExpires}) ;
-      },
-      ever:(js)=>{
-        if(callback) callback(js) ;
-        this.loading = false ;
-      }
-    }) ;
-  }
-
-  _doAssets(js) {
-    var newState = {user:js.user} ;
-
-    if(!this.unmount) this.setState(newState) ;
-  }
-
-  render(){
+  renderDetail(){
     var user = this.state.user ;
     if(user.icon) user.icon = global.getUploadURL(user.icon) ;
     if(!user.level) user.level = {} ;
@@ -152,7 +71,7 @@ const styles = StyleSheet.create({
   user:{
     flexDirection:'row',
     position:'absolute',
-    top:PWidth*2/3-65,
+    top:PWidth*2/3-68,
     paddingLeft:20,
   },
   userIcon:{

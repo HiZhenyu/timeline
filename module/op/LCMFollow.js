@@ -36,7 +36,7 @@ export default class LCMFollow extends Component {
   //获取当前状态
   _fetch(){
     var online = global.getOnline() ;
-    v2iapi('userfollow','isfollow',{uid:this.state.user.uid},{
+    v2iapi('userfollow/isfollow',{uid:this.state.user.uid},{
       succ:(js)=>{
         if(!js.uid) return ;
         this._doAssets(js) ;
@@ -63,7 +63,7 @@ export default class LCMFollow extends Component {
 
     this.setState({doing:true}) ;
     this.digXing = true ;
-    v2iapi('userfollow','add',{uid:this.state.user.uid},{
+    v2iapi('userfollow/add',{uid:this.state.user.uid},{
       succ:(js)=>{
         this._doAssets(js) ;
       },

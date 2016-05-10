@@ -41,7 +41,7 @@ export default class LCCatSignBtn extends Component {
 
   //获取当前状态
   _fetch(){
-    v2iapi('cat','hassign',{id:this.state.cat.id},{
+    v2iapi('cat/hassign',{id:this.state.cat.id},{
       succ:(js)=>{
         this._doAssets(js) ;
       },
@@ -66,15 +66,14 @@ export default class LCCatSignBtn extends Component {
 
     if(this.state.did) return ;
 
-    this.setState({doing:true}) ;
     this.digXing = true ;
-    v2iapi('cat','dosign',{id:this.state.cat.id},{
+    v2iapi('cat/dosign',{id:this.state.cat.id},{
       succ:(js)=>{
         this._doAssets(js) ;
       },
       ever:(js)=>{
         this.digXing = false ;
-        if(!js || !js.code || js.code != '200') this.setState({did:false}) ;
+        if(!js || !js.code || js.code != '200') if(!this.unmount) this.setState({did:false}) ;
       }
     }) ;
   }

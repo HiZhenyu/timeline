@@ -43,7 +43,7 @@ export default class LCCatJoinBtn extends Component {
 
   //获取当前状态
   _fetch(){
-    v2iapi('cat','hasjoin',{id:this.state.cat.id},{
+    v2iapi('cat/hasjoin',{id:this.state.cat.id},{
       succ:(js)=>{
         this._doAssets(js) ;
       },
@@ -72,7 +72,7 @@ export default class LCCatJoinBtn extends Component {
     if(this.state.joinMsg) post.content = this.state.joinMsg ;
 
     this.digXing = true ;
-    v2iapi('cat','dojoin',post,{
+    v2iapi('cat/dojoin',post,{
       succ:(js)=>{
         this._doAssets(js,()=>{
           global.tip('恭喜您加入本机友会！') ;

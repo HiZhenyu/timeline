@@ -37,7 +37,7 @@ export default class LCMDig extends Component {
     post.timeline_id = this.timelineId ;
 
     this.digXing = true ;
-    v2iapi('iop','good',post,{
+    v2iapi('iop/good',post,{
       succ:(js)=>{
         this.setState({num:++this.state.num,did:true}) ;
         if(js.score) global.tip('点赞成功，并获得'+js.score+'金币!') ;

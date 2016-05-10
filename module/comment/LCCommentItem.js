@@ -32,12 +32,11 @@ export default class LCCommentItem extends Component {
     let style = [styles.item,styles.flex] ;
     if(this.props.style) style.push(this.props.style) ;
 
-    let lineStyle = [styles.commentLine] ;
-    if(this.props.lineStyle) lineStyle.push(this.props.lineStyle) ;
+    let lineTpl = (this.props.rowID && this.props.rowID !='0') ? (<View style={[styles.commentLine,this.props.lineStyle]} />) : null ;
 
     return (
       <View style={style} key={comment.id}>
-        <View style={lineStyle} />
+        {lineTpl}
         <View style={[styles.flexRow]}>
           <View style={styles.userWrap}><LCUser navigator={this.props.navigator} userNameStyle={styles.userNameStyle} user={comment.user} styleId={1} /></View>
           <View style={styles.postTime}>

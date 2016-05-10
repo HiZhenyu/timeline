@@ -107,7 +107,7 @@ export default class LoginPageIn extends Component {
     if(!post.passwd) return global.tip('请填写您的登录密码！') ;
 
     this.setState({submitXing:true}) ;
-    global.v2iapi('account','login',post,{
+    global.v2iapi('account/login',post,{
       succ:(js)=>{
         if(js.skey){
           global.onlineKey = js.key ;
@@ -129,8 +129,8 @@ export default class LoginPageIn extends Component {
           return ;
         }}) ;
       } ,
-      ever:()=>{
-        this.setState({submitXing:false}) ;
+      ever:(js)=>{
+        (!js || js.code != '200') && this.setState({submitXing:false}) ;
       }
     }) ;
   }

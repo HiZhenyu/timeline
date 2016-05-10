@@ -85,7 +85,7 @@ export default class LCSlideImageItem extends Component {
       <ScrollView
         alwaysBounceVertical={false}
         alwaysBounceHorizontal={false}
-        contentContainerStyle={styles.wrap}
+        contentContainerStyle={this.props.style}
         showsHorizontalScrollIndicator={false}
         showsVerticalScrollIndicator={false}
         minimumZoomScale={1.0}

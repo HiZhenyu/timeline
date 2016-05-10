@@ -87,7 +87,7 @@ export default class LCCatSP extends Component {
     post.id = this.state.cat.id ;
 
     this.loading = true ;
-    global.v2iapi('cat','detail',post,{
+    global.v2iapi('cat/detail',post,{
       succ:(js)=>{
         this._doAssets(js) ;
         global.storage.save({key:this.storageKey,id:this._getStorageId(),rawData:js,expires:this.storageExpires}) ;

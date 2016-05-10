@@ -56,7 +56,7 @@ export default class PasswordPage extends Component {
     } ;
 
     this.setState({smsCaptchaXing:true}) ;
-    v2iapi('account','smscaptcha',post,{
+    v2iapi('account/smscaptcha',post,{
       succ:(js)=>{
           global.tip('验证码已发送到您的手机') ;
           this.smsCaptchaInterval = setInterval(doa,1000) ;
@@ -81,13 +81,13 @@ export default class PasswordPage extends Component {
     if(!post.passwd) return global.tip('请填写您的登录密码！') ;
 
     this.setState({submitXing:true}) ;
-    global.v2iapi('account','passwd',post,{
+    global.v2iapi('account/passwd',post,{
       succ:(js)=>{
         if(js.skey) storage.save({key: 'onlineskey',rawData: js.skey , expires: null }) ;
         if(js.online) storage.save({key: 'online',rawData: js.online , expires: null }) ;
       } ,
       ever:()=>{
-        this.setState({submitXing:false}) ;
+        (!js || js.code != '200') && this.setState({submitXing:false}) ;
       }
     }) ;
   }
