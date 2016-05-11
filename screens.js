@@ -12,7 +12,10 @@ import SlideImagesPage from './timeline/SlideImagesPage' ;
 import TimelineDigsPage from './timeline/TimelineDigsPage' ;
 
 import ExploreIndexPage from './explore/ExploreIndexPage' ;
+
 import PostTimelinePage from './post/PostTimelinePage' ;
+import SelectPhotosPage from './post/SelectPhotosPage' ;
+
 
 import CatDetailMainPage from './cat/CatDetailMainPage' ;
 import CatDetailIndexPage from './cat/CatDetailIndexPage' ;
@@ -46,6 +49,7 @@ export function registerScreens() {
   Navigation.registerComponent('timeline.TimelineDigsPage', () => TimelineDigsPage);
 
   Navigation.registerComponent('post.PostTimelinePage', () => PostTimelinePage);
+  Navigation.registerComponent('post.SelectPhotosPage', () => SelectPhotosPage);
 
   Navigation.registerComponent('explore.ExploreIndexPage', () => ExploreIndexPage);
 

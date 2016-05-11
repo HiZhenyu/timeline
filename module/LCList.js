@@ -50,6 +50,9 @@ export default class LCList extends Component {
     //11、
     this.styleEmptyView = null ;
 
+    //12、
+    this.pageSize = this.props.pageSize ? this.props.pageSize : 1 ;
+
     //-- 完毕 --
 		this.state = {
       dataSource:new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}),
@@ -390,8 +393,7 @@ export default class LCList extends Component {
         contentContainerStyle={style}
         onEndReachedThreshold={220}
 
-        enableEmptySections={true}
-        pageSize={1}
+        pageSize={this.pageSize}
 
         {...this.props}
       />

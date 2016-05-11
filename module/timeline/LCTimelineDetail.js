@@ -28,7 +28,7 @@ export default class LCTimelineDetail extends LCDetail {
 
 
   _renderDigs(digs){
-    if(!digs || !digs.list || dis.list.length < 1) return ;
+    if(!digs || !digs.list || digs.list.length < 1) return ;
 
     return (
       <View>
@@ -55,7 +55,7 @@ export default class LCTimelineDetail extends LCDetail {
 
   renderDetail(){
     let timeline = this.state.timeline ;
-    let digsTpl = this._renderDigs() ;
+    let digsTpl = this._renderDigs(timeline.digs) ;
 
     let style = [styles.wrap] ;
     if(this.props.style) style.push(this.props.style) ;

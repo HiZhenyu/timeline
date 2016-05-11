@@ -38,8 +38,12 @@ export default class LCSlideImageItem extends Component {
 
   _doMount(){
     var image = this.state.image ;
-    if(image.hdimg) image.icon = image.hdimg ;
-    this.setState({image:image}) ;
+    this.setState({image:image},()=>{
+      if(!image.hdimg) return ;
+
+      image.icon = image.hdimg ;
+      this.setState({image:image}) ;
+    }) ;
   }
 
 
@@ -77,8 +81,7 @@ export default class LCSlideImageItem extends Component {
     let theight = twidth/image.width * image.height ;
     if(theight < PHeight) theight = PHeight ;
 
-    image.icon = global.getUploadURL(image.icon) ;
-
+    let imageSource = image.icon ? {uri:global.getUploadURL(image.icon)} : image ;
     var loader = this.state.loading ?  <GiftedSpinner /> : null ;
 
     return (
@@ -93,7 +96,7 @@ export default class LCSlideImageItem extends Component {
         <TouchableWithoutFeedback onPress={this._onPress.bind(this)}>
         <Image
           resizeMode="contain"
-          source={{uri:image.icon}}
+          source={imageSource}
           style={[styles.image,{width:twidth,height:theight}]}
           onLoadStart={this._onLoadStart.bind(this)}
           onError={this._onError.bind(this)}

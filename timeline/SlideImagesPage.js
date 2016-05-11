@@ -9,15 +9,21 @@ import {IndicatorViewPager,PagerDotIndicator} from 'rn-viewpager';
 import LCSlideImageItem from './../module/image/LCSlideImageItem' ;
 
 export default class SlideImagesPage extends Component {
+  static defaultProps = {
+    defaultIndex: 0,
+    images:[],
+  } ;
+
+
   constructor(props) {
     super(props) ;
 
     this.state = {
-      images:this.props.images ? this.props.images : [],
+      images:props.images ,
       holdOns:[] ,
     } ;
 
-    this.defaultIndex = this.props.defaultIndex ? this.props.defaultIndex : 0 ;
+    this.defaultIndex = props.defaultIndex ;
     if(this.defaultIndex >= this.state.images.length || this.defaultIndex < 1) this.defaultIndex = 0 ;
 
     this.state.images.map((image,i)=>{
