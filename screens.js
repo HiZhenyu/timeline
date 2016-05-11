@@ -35,6 +35,15 @@ import ShopItemListMainPage from './shop/ShopItemListMainPage' ;
 import SubjectIndexPage from './subject/SubjectIndexPage' ;
 import SubjectPage from './subject/SubjectPage' ;
 
+
+import MedalListPage from './medal/MedalListPage' ;
+import MedalPage from './medal/MedalPage' ;
+import MedalUserlistPage from './medal/MedalUserlistPage' ;
+
+import TaskListPage from './task/TaskListPage' ;
+
+
+
 export function registerScreens() {
   Navigation.registerComponent('index.IndexMainPage', () => IndexMainPage);
 
@@ -70,5 +79,11 @@ export function registerScreens() {
 
   Navigation.registerComponent('subject.SubjectIndexPage', () => SubjectIndexPage);
   Navigation.registerComponent('subject.SubjectPage', () => SubjectPage);
+
+  Navigation.registerComponent('medal.MedalListPage', () => MedalListPage);
+  Navigation.registerComponent('medal.MedalPage', () => MedalPage);
+  Navigation.registerComponent('medal.MedalUserlistPage', () => MedalUserlistPage);
+
+  Navigation.registerComponent('task.TaskListPage', () => TaskListPage);
 
 }

@@ -108,7 +108,7 @@ export default class LCTimelineDetail extends Component {
 
     return (
       <View style={style}>
-
+        <Image />
       </View>
     ) ;
   }
