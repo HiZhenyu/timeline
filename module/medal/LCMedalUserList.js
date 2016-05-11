@@ -1,4 +1,3 @@
-
 import LCList from './../LCList' ;
 import LCMedalUserListItem from './LCMedalUserListItem' ;
 

@@ -13,7 +13,7 @@ export default class LCTaskList extends LCList {
     this.storeListSize = props.loadMore ? this.storeDefaultListSize : 0 ;
     this.postKeyMap = {ps:'ps',p:'p'} ;
     this.storageKey = 'task'+this.props.gnames ;
-    this.storageExpires = 3600*1000 ;
+    this.storageExpires = 0 ;
     this.apiPath = 'task/'+this.props.gnames ;
 
     this.itemComponent = LCTaskListItem ;

@@ -49,7 +49,7 @@ export default class LCExSuperb extends Component {
         icon:require('./../../images/icon_s_sign.png')
       },
       {
-        id:'task',
+        id:'task.TaskListPage',
         name:'做任务',
         icon:require('./../../images/icon_s_task.png')
       },
@@ -64,7 +64,7 @@ export default class LCExSuperb extends Component {
         icon:require('./../../images/icon_s_luck.png')
       },
       {
-        id:'medal',
+        id:'medal.MedalListPage',
         name:'勋章专区',
         icon:require('./../../images/icon_s_medal.png')
       },

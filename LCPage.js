@@ -36,7 +36,7 @@ class IScrollView extends Component {
 
     let TheComponent = this.props.component ? this.props.component : ScrollView ;
 
-    return (<TheComponent style={styles.backgroundGray} {...this.props}>{header}{footer}</TheComponent>) ;
+    return (<TheComponent style={[styles.backgroundGray,{flex:1}]} {...this.props}>{header}{footer}</TheComponent>) ;
   }
 }
 
@@ -61,6 +61,20 @@ export default class LCPage extends Component {
     //格式是 [{component:View,props:{id:'id'},key:'cview'}] ;
     this.theComponents = [] ;
 
+    //4、外围样式
+    this.styleComponents = null ;
+
+    //5、固定在顶部的模块
+    this.fixedTopComponents = [] ;
+
+    //6、固定在底部的模块
+    this.fixedBottomComponents = [] ;
+
+    //7、样式
+    this.styleFixedTopComponents = null ;
+
+    this.styleFixedBottomComponents = null ;
+
     this.state = {
       refreshing:false,
       scrollsToTop:props.scrollsToTop ,
@@ -83,7 +97,8 @@ export default class LCPage extends Component {
     this.doUpdates = [] ;
     this.doUpdates.push('mainView') ;
 
-    this.theComponents.map(it=>it.key && (this.doUpdates.push(it.key))) ;
+    let cs = [this.theComponents,this.fixedTopComponents,this.fixedBottomComponents] ;
+    cs.map(ic=>ic.map(it=>it.key && (this.doUpdates.push(it.key)))) ;
   }
 
   _doMount(){
@@ -117,8 +132,10 @@ export default class LCPage extends Component {
     updatedCount == this.doUpdates.length && this.setState({refreshing:false}) ;
   }
 
-  renderHeader(){
-    let tpls = this.theComponents.map((it,i)=>{
+
+  //将一组组件
+  _renderComponents(components){
+    return components.map((it,i)=>{
       if(it.key){
         let up = {} ;
         up[it.key] = false ;
@@ -130,8 +147,10 @@ export default class LCPage extends Component {
       it.props.key = it.key ? it.key : i ;
       return <it.component navigator={this.props.navigator} {...it.props}  />
     }) ;
+  }
 
-    return <View style={this.styleComponents}>{tpls}</View> ;
+  renderHeader(){
+    return <View style={this.styleComponents}>{this._renderComponents(this.theComponents)}</View> ;
   }
 
   render(){
@@ -149,21 +168,46 @@ export default class LCPage extends Component {
       />) ;
     } ;
 
-    return (
-      <this.mainView
-        navigator={this.props.navigator}
-        renderHeader={this.renderHeader.bind(this)}
-        scrollsToTop={this.state.scrollsToTop}
+    let listViewTpl = (<this.mainView
+      navigator={this.props.navigator}
+      renderHeader={this.renderHeader.bind(this)}
+      scrollsToTop={this.state.scrollsToTop}
 
-        style={styles.backgroundGray}
+      style={styles.backgroundGray}
 
-        doUpdate={this.state.ups.mainView}
-        updateCallback={(js)=>this._updateRefreshUp({mainView:false})}
+      doUpdate={this.state.ups.mainView}
+      updateCallback={(js)=>this._updateRefreshUp({mainView:false})}
 
-        refreshControl={refreshControl}
-        {...this.mainViewProps}
-       />
-    ) ;
+      refreshControl={refreshControl}
+      {...this.mainViewProps}
+     />) ;
+
+     //
+     if(this.fixedTopComponents.length < 1 && this.fixedBottomComponents.length < 1){
+       return listViewTpl ;
+     }
+
+     let fixedTopTpl = null ;
+     if(this.fixedTopComponents.length > 0){
+       fixedTopTpl = (<View style={this.styleFixedTopComponents}>
+          {this._renderComponents(this.fixedTopComponents)}
+        </View>) ;
+     }
+
+     let fixedBottomTpl = null ;
+     if(this.fixedBottomComponents.length > 0){
+       fixedTopTpl = (<View style={this.styleFixedBottomComponents}>
+          {this._renderComponents(this.fixedBottomComponents)}
+        </View>) ;
+     }
+
+     return (
+       <View style={[styles.backgroundGray,{flex:1}]}>
+       {fixedTopTpl}
+       {listViewTpl}
+       {fixedBottomTpl}
+      </View>
+     ) ;
   }
 }
 

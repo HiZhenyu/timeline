@@ -112,7 +112,7 @@ export default class LCTimelineDetail extends Component {
         <View style={styles.tit}><Text style={styles.titText}>{shopItem.name}</Text></View>
         <View style={styles.param}>
             <View style={styles.infLeft}>
-                <View style={styles.paramKey}><Text style={style.paramKeyText}>{'金币:'}</Text></View>
+                <View style={styles.paramKey}><Text style={style.paramKeyText}>金币:</Text></View>
                 <View style={style.paramVal}><Text style={style.paramValText,{color:'#f60'}}>{shopItem.score}</Text></View>
             </View>
             <View style={styles.infRight}>
