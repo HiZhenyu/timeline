@@ -80,14 +80,16 @@ export default class LCTaskDidBtn extends Component {
     if(this.state.did) style.push(styles.opsBtnDid) ;
     if(this.props.style) style.push(this.props.style) ;
 
+    let onPress = this._onPress.bind(this) ;
     let btnText = '领取奖励' ;
     if(this.state.did){
       btnText = '已完成' ;
       style.push(styles.opsBtnBgc) ;
+      onPress = null ;
     }
 
     return (
-      <TouchableHighlight underlayColor="#F6F6F6" style={style} onPress={this._onPress.bind(this)}>
+      <TouchableHighlight underlayColor="#F6F6F6" style={style} onPress={onPress}>
         <View style={styles.opsBtnView}>
           <Text style={styles.opsBtnText} allowFontScaling={false}>{btnText}</Text>
         </View>
