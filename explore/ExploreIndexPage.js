@@ -32,7 +32,7 @@ export default class ExploreIndexPage extends LCPage {
           msubject : 4 ,
           location : 4 ,
 
-          locationFooter : <LCMoreBox title="更多热门机友会=>" onPress={this._onPressMoreCat.bind(this)} />,
+          locationFooter : <LCMoreBox title="更多热门机友会=>" onPress={this._onPressToMoreCat.bind(this)} />,
           itemCatProps : {styleId:1 , style:styles.catItem} ,
           style : styles.catListWrap ,
           groupStyle : styles.catListGroupWrap ,
@@ -50,7 +50,7 @@ export default class ExploreIndexPage extends LCPage {
     ] ;
   }
 
-  _onPressMoreCat(){
+  _onPressToMoreCat(){
     if(!this.props.navigator) return ;
     var props = {} ;
 

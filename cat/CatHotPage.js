@@ -38,7 +38,7 @@ export default class CatHotPage extends LCPage {
     ] ;
   }
 
-  _onPressMoreCat(m){
+  _onPressToMoreCat(m){
     console.log(m) ;
   }
 
@@ -59,7 +59,7 @@ export default class CatHotPage extends LCPage {
 
   _renderCFooter(m){
     let title = '更多' + this._getCatMName(m) + '机友会' ;
-    return  <LCMoreBox style={styles.btnMore} title={title} onPress={this._onPressMoreCat.bind(this,m)} /> ;
+    return  <LCMoreBox style={styles.btnMore} title={title} onPress={this._onPressToMoreCat.bind(this,m)} /> ;
   }
 
 }

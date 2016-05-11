@@ -38,7 +38,7 @@ import SubjectPage from './subject/SubjectPage' ;
 
 import MedalListPage from './medal/MedalListPage' ;
 import MedalPage from './medal/MedalPage' ;
-import MedalUserlistPage from './medal/MedalUserlistPage' ;
+import MedalUserListPage from './medal/MedalUserListPage' ;
 
 import TaskListPage from './task/TaskListPage' ;
 
@@ -82,7 +82,7 @@ export function registerScreens() {
 
   Navigation.registerComponent('medal.MedalListPage', () => MedalListPage);
   Navigation.registerComponent('medal.MedalPage', () => MedalPage);
-  Navigation.registerComponent('medal.MedalUserlistPage', () => MedalUserlistPage);
+  Navigation.registerComponent('medal.MedalUserListPage', () => MedalUserListPage);
 
   Navigation.registerComponent('task.TaskListPage', () => TaskListPage);
 

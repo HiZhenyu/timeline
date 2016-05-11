@@ -75,7 +75,7 @@ export default class LCExSuperb extends Component {
       },
       {
         id:'subject.SubjectIndexPage',
-        name:'活动与话题',
+        name:'活动话题',
         icon:require('./../../images/icon_s_subject.png')
       },
     ] ;

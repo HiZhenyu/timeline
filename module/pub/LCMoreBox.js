@@ -15,7 +15,7 @@ export default class LCMoreBox extends Component {
     this.props.style && style.push(this.props.style) ;
 
     return (<TouchableHighlight onPress={this.props.onPress} style={style} underlayColor="#ccc">
-      <Text allowFontScaling={false} style={styles.btnMoreText}>{this.props.title}=></Text>
+      <Text allowFontScaling={false} style={styles.btnMoreText}>{this.props.title}</Text>
     </TouchableHighlight>) ;
   }
 }

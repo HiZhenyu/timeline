@@ -109,18 +109,18 @@ export default class LCTimelineDetail extends Component {
     return (
       <View style={style}>
         <View style={styles.icon}><Image style={styles.image} source={{uri:global.getUploadURL(shopItem.icon)}} /></View>
-        <View style={styles.tit}><Text style={styles.titText}>{shopItem.name}</Text></View>
+        <View style={styles.tit}><Text style={styles.titText} allowFontScaling={false}>{shopItem.name}</Text></View>
         <View style={styles.param}>
             <View style={styles.infLeft}>
-                <View style={styles.paramKey}><Text style={style.paramKeyText}>金币:</Text></View>
-                <View style={style.paramVal}><Text style={style.paramValText,{color:'#f60'}}>{shopItem.score}</Text></View>
+                <View style={styles.paramKey}><Text style={style.paramKeyText} allowFontScaling={false}>金币:</Text></View>
+                <View style={style.paramVal}><Text style={style.paramValText,{color:'#f60'}} allowFontScaling={false}>{shopItem.score}</Text></View>
             </View>
             <View style={styles.infRight}>
-                <View style={styles.paramKey}><Text style={style.paramKeyText}>{'库存:'}</Text></View>
-                <View style={style.paramVal}><Text style={style.paramValText,{color:'#f60'}}>{shopItem.num}</Text></View>
+                <View style={styles.paramKey}><Text style={style.paramKeyText} allowFontScaling={false}>{'库存:'}</Text></View>
+                <View style={style.paramVal}><Text style={style.paramValText,{color:'#f60'}} allowFontScaling={false}>{shopItem.num}</Text></View>
             </View>
         </View>
-        <View style={styles.intro}><Text>{shopItem.info}</Text></View>
+        <View style={styles.intro}><Text allowFontScaling={false}>{shopItem.info}</Text></View>
       </View>) ;
   }
 }

@@ -1,7 +1,7 @@
 import LCMedalUserList from './../module/medal/LCMedalUserList' ;
 import LCPage from './../LCPage' ;
 
-export default class MedaluserListPage extends LCPage {
+export default class MedalUserListPage extends LCPage {
   constructor(props) {
     super(props) ;
 

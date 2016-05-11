@@ -38,8 +38,6 @@ export default class LCMedalDetail extends LCDetail {
   }
 }
 
-
-var itemWidth = React.Dimensions.get('window').width/4 ;
 const styles = StyleSheet.create({
   medal:{
     flexDirection:'row',

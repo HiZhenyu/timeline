@@ -33,23 +33,31 @@ export default class MedalPage extends LCPage {
       },
       {
         component : LCMedalUserList ,
-        props : {ps :12,p:1,medalId:medal.id,style:styles.MedalUserList,itemStyle:styles.MedalUserListItem,styleId:1,renderFooter:()=>{
-          return <LCMoreBox title={'查看更多加入的机友～'} onPress={this._onPressMoreMedalUserlist.bind(this)} />
-        }} ,
+        props : {
+          ps :42,
+          p:1,
+          medalId:medal.id,
+          style:styles.medalUserList,
+          itemStyle:styles.medalUserListItem,
+          styleId:1,
+          renderFooter:()=>{
+            return <LCMoreBox title={'查看更多拥有该勋章的机友～'} onPress={this._onPressToMoreMedalUserlist.bind(this)} />
+          }
+        } ,
         key : 'medaluserlist',
       }
     ] ;
   }
 
 
-  _onPressMoreMedalUserlist(){
+  _onPressToMoreMedalUserlist(){
     if(!this.props.navigator) return ;
     var props = {} ;
     if(this.props.medal) props.medal = this.props.medal ;
 
     //使用Navigation方案
     this.props.navigator.push({
-      screen: 'medal.MedalUserlistPage',
+      screen: 'medal.MedalUserListPage',
       passProps: props,
       animated: true,
       title: '拥有该勋章的机友们',
@@ -64,13 +72,10 @@ export default class MedalPage extends LCPage {
       navigatorButtons: {}
     });
   }
-
-
-
 }
 
 const styles = StyleSheet.create({
-  MedalUserList:{
+  medalUserList:{
     backgroundColor:'#fff',
     flex:1,
     flexDirection:'row',
@@ -79,7 +84,7 @@ const styles = StyleSheet.create({
     borderBottomWidth:0,
     backgroundColor:'#fff',
   },
-  MedalUserListItem:{
+  medalUserListItem:{
     width:55,
     height:55,
   }
