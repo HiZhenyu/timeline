@@ -3,10 +3,12 @@ import React, {
   StyleSheet,
   TouchableHighlight ,
   View,
+  Dimensions,
   Text,
   Image
 } from 'react-native';
 
+import LCTitle from './../pub/LCTitle' ;
 
 export default class LCTimelineDetail extends Component {
 
@@ -101,21 +103,89 @@ export default class LCTimelineDetail extends Component {
   render(){
     let shopItem = this.state.shopItem ;
 
-    console.log(shopItem);
-
     let style = [styles.wrap] ;
     if(this.props.style) style.push(this.props.style) ;
 
     return (
       <View style={style}>
-        <Image />
-      </View>
-    ) ;
+        <View style={styles.icon}><Image style={styles.image} source={{uri:global.getUploadURL(shopItem.icon)}} /></View>
+        <View style={styles.tit}><Text style={styles.titText}>{shopItem.name}</Text></View>
+        <View style={styles.param}>
+            <View style={styles.infLeft}>
+                <View style={styles.paramKey}><Text style={style.paramKeyText}>{'金币:'}</Text></View>
+                <View style={style.paramVal}><Text style={style.paramValText,{color:'#f60'}}>{shopItem.score}</Text></View>
+            </View>
+            <View style={styles.infRight}>
+                <View style={styles.paramKey}><Text style={style.paramKeyText}>{'库存:'}</Text></View>
+                <View style={style.paramVal}><Text style={style.paramValText,{color:'#f60'}}>{shopItem.num}</Text></View>
+            </View>
+        </View>
+        <View style={styles.intro}><Text>{shopItem.info}</Text></View>
+      </View>) ;
   }
 }
 
+const PWidth = Dimensions.get('window').width;
 const styles = StyleSheet.create({
   wrap:{
     backgroundColor:'#fff',
   },
+  icon:{
+    height:PWidth-150,
+    alignItems:'center',
+    backgroundColor:'#fff',
+  },
+  image:{
+    height:PWidth-150,
+    width:PWidth-150,
+  },
+  tit:{
+    height:30,
+    width:PWidth,
+    paddingLeft:10,
+  },
+  titText:{
+    height:30,
+    lineHeight:25,
+    fontSize:18,
+    fontWeight:'bold',
+
+  },
+  param:{
+    height:20,
+    flexDirection:'row',
+    padding:10,
+    paddingTop:5,
+  },
+  infLeft:{
+    width:PWidth/2,
+    flexDirection:'row',
+  },
+  infRight:{
+    flex:1,
+    flexDirection:'row',
+  },
+  paramKey:{
+    width:40,
+    height:20,
+  },
+  paramKeyText:{
+    height:20,
+    lineHeight:20,
+    fontSize:12,
+    color:'#555',
+  },
+  paramVal:{
+
+  },
+  paramValText:{
+    fontSize:13,
+    fontWeight:'bold',
+  },
+  intro:{
+    margin:10,
+    paddingTop:5,
+    paddingBottom:5,
+    backgroundColor:'#ccc',
+  }
 }) ;
