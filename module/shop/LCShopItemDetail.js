@@ -106,10 +106,11 @@ export default class LCTimelineDetail extends Component {
     let style = [styles.wrap] ;
     if(this.props.style) style.push(this.props.style) ;
 
+//  //<View style={styles.tit}><Text style={styles.titText} allowFontScaling={false}>{shopItem.name}</Text></View>
+
     return (
       <View style={style}>
         <View style={styles.icon}><Image style={styles.image} source={{uri:global.getUploadURL(shopItem.icon)}} /></View>
-        <View style={styles.tit}><Text style={styles.titText} allowFontScaling={false}>{shopItem.name}</Text></View>
         <View style={styles.param}>
             <View style={styles.infLeft}>
                 <View style={styles.paramKey}><Text style={style.paramKeyText} allowFontScaling={false}>金币:</Text></View>
@@ -120,6 +121,7 @@ export default class LCTimelineDetail extends Component {
                 <View style={style.paramVal}><Text style={style.paramValText,{color:'#f60'}} allowFontScaling={false}>{shopItem.num}</Text></View>
             </View>
         </View>
+        <LCTitle title={'商品详情'} />
         <View style={styles.intro}><Text allowFontScaling={false}>{shopItem.info}</Text></View>
       </View>) ;
   }
@@ -128,7 +130,7 @@ export default class LCTimelineDetail extends Component {
 const PWidth = Dimensions.get('window').width;
 const styles = StyleSheet.create({
   wrap:{
-    backgroundColor:'#fff',
+
   },
   icon:{
     height:PWidth-150,
@@ -143,6 +145,7 @@ const styles = StyleSheet.create({
     height:30,
     width:PWidth,
     paddingLeft:10,
+    backgroundColor:'#fff',
   },
   titText:{
     height:30,
@@ -152,10 +155,11 @@ const styles = StyleSheet.create({
 
   },
   param:{
-    height:20,
+    height:30,
     flexDirection:'row',
     padding:10,
     paddingTop:5,
+    backgroundColor:'#fff',
   },
   infLeft:{
     width:PWidth/2,
@@ -172,20 +176,18 @@ const styles = StyleSheet.create({
   paramKeyText:{
     height:20,
     lineHeight:20,
-    fontSize:12,
+    fontSize:14,
     color:'#555',
   },
   paramVal:{
 
   },
   paramValText:{
-    fontSize:13,
+    fontSize:14,
     fontWeight:'bold',
   },
   intro:{
-    margin:10,
-    paddingTop:5,
-    paddingBottom:5,
-    backgroundColor:'#ccc',
+    padding:10,
+    backgroundColor:'#fff',
   }
 }) ;

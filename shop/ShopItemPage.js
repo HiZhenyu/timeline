@@ -1,5 +1,7 @@
 import LCPage from './../LCPage' ;
 import LCShopItemDetail from './../module/shop/LCShopItemDetail' ;
+import LCShopItemList from './../module/shop/LCShopItemList' ;
+import LCTitle from './../module/pub/LCTitle' ;
 
 export default class ShopItemPage extends LCPage {
   constructor(props) {
@@ -9,7 +11,14 @@ export default class ShopItemPage extends LCPage {
       {
         component : LCShopItemDetail ,
         props : {shopItem : props.shopItem } ,
-        key : 'shopItemDetail' ,
+      },
+      {
+        component : LCTitle ,
+        props : {title : '推荐列表' } ,
+      },
+      {
+        component : LCShopItemList ,
+        props : {ps : 4 ,styleId : 1} ,
       }
     ] ;
   }
