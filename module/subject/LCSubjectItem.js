@@ -1,10 +1,11 @@
-import React, {
-  Component,
+import React,{ Component } from 'react' ;
+import {
   StyleSheet,
   TouchableHighlight ,
   View,
   Text,
-  Image
+  Image,
+  Dimensions
 } from 'react-native';
 
 export default class LCSubject extends Component {
@@ -95,7 +96,7 @@ const styles = StyleSheet.create({
   image:{
     resizeMode:'stretch',
     flex:1,
-    height:React.Dimensions.get('window').width/2,
+    height:Dimensions.get('window').width/2,
   },
   titleText:{
     color:'#0049bb',

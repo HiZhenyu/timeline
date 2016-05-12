@@ -1,5 +1,5 @@
-import React, {
-  Component,
+import React,{ Component } from 'react' ;
+import {
   StyleSheet,
   TouchableHighlight ,
   TouchableOpacity ,
@@ -8,6 +8,8 @@ import React, {
   Image,
   CameraRoll,
   ListView,
+  Dimensions,
+  Platform
 } from 'react-native';
 
 import InvertibleScrollView from 'react-native-invertible-scroll-view';
@@ -69,7 +71,7 @@ export default class SelectPhotosPage extends Component {
       assetType: this.props.assetType,
     } ;
 
-    React.Platform.OS === 'android' && (delete params.groupTypes) ;
+    Platform.OS === 'android' && (delete params.groupTypes) ;
     this.lastCursor && (params.after = this.lastCursor) ;
 
     this.loading = true ;
@@ -261,7 +263,7 @@ class LCSelectPhotosPItem extends Component {
 
 
 const rowNum = 4 ;
-const itemWidth = (React.Dimensions.get('window').width - 8*(rowNum+1)) / rowNum ;
+const itemWidth = (Dimensions.get('window').width - 8*(rowNum+1)) / rowNum ;
 const styles = StyleSheet.create({
   spinner:{
     width: itemWidth ,

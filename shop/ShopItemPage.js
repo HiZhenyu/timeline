@@ -14,7 +14,7 @@ export default class ShopItemPage extends LCPage {
       },
       {
         component : LCTitle ,
-        props : {title : '推荐列表' } ,
+        props : {title : '推荐商品' } ,
       },
       {
         component : LCShopItemList ,

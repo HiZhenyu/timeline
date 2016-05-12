@@ -1,5 +1,5 @@
-import React, {
-  Component,
+import React,{ Component } from 'react' ;
+import {
   StyleSheet,
   TouchableHighlight ,
   View,
@@ -9,7 +9,6 @@ import React, {
   Image
 } from 'react-native';
 
-import LCNavBar from './../module/pub/LCNavBar' ;
 
 export default class MsgPage extends Component {
   constructor(props) {

@@ -1,10 +1,11 @@
-import React, {
-  Component,
+import React,{ Component } from 'react' ;
+import {
   StyleSheet,
   View,
   TouchableHighlight,
   Image,
   Text,
+  Dimensions
 } from 'react-native';
 
 
@@ -93,7 +94,7 @@ export default class LCExSuperb extends Component {
   }
 }
 
-var itemWidth = React.Dimensions.get('window').width/4 ;
+var itemWidth = Dimensions.get('window').width/4 ;
 var styles = StyleSheet.create({
   wrap:{
     flexDirection:'row',

@@ -1,5 +1,5 @@
-import React, {
-  Component,
+import React,{ Component } from 'react' ;
+import {
   StyleSheet,
   View,
   ListView,
@@ -342,7 +342,7 @@ export default class LCList extends Component {
     props.rowID = rowID ;
     props.sectionID = sectionID ;
 
-    props.key = item[this.itemComponentKey] ;
+    props.key = rowID; //item[this.itemComponentKey] ;
     props[this.itemComponentDataName] = item ;
 
     return (<this.itemComponent {...props} />) ;

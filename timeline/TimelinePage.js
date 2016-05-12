@@ -28,18 +28,13 @@ export default class TimelinePage extends LCPage {
       }
     ] ;
 
-    this.fixedTopComponents = [
-      {
-        component : LCTitle ,
-        props : {title : 'hello word'} ,
-      }
-    ] ;
-
+    /*
     this.fixedBottomComponents = [
       {
         component : LCTitle ,
         props : {title : 'hello word'} ,
       }
     ] ;
+    */
   }
 }

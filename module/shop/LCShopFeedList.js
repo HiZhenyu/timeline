@@ -1,4 +1,5 @@
-import React, {
+import React from 'react' ;
+import {
   StyleSheet,
 } from 'react-native';
 
@@ -33,5 +34,5 @@ export default class LCShopFeedList extends LCList {
 }
 
 const styles = StyleSheet.create({
-  
+
 }) ;

@@ -1,5 +1,5 @@
-import React, {
-  Component,
+import React,{ Component } from 'react' ;
+import {
   StyleSheet,
   TouchableHighlight,
   Image,
@@ -76,13 +76,23 @@ export default class LCTimelineItem extends Component {
     return ;
   }
 
+
+  getEmotionContents(content){
+    let es = global.getEmotionContents(content) ;
+
+    return es.map((it,i)=>{
+      if(it.component == 'Text') return <Text key={i} allowFontScaling={false}>{it.content}</Text> ;
+      if(it.component == 'Image') return <Image key={i} source={{uri:it.content,height:15,width:15}} />
+    }) ;
+  }
+
   //渲染一组评论
   _renderComments(comment){
     return (
       <View style={[styles.commentsItem]} key={comment.id}>
         <Text style={styles.commentItemText} allowFontScaling={false}>
           <LCUser navigator={this.props.navigator} user={comment.user} styleId={2} />：
-          <Text style={styles.itemcText} numberOfLines={3} allowFontScaling={false}>{global.getEmotionContents(comment.content)}</Text>
+          <Text style={styles.itemcText} numberOfLines={3} allowFontScaling={false}>{this.getEmotionContents(comment.content)}</Text>
         </Text>
       </View>
     ) ;
@@ -118,7 +128,11 @@ export default class LCTimelineItem extends Component {
     let timelineText = timeline.content ? timeline.content : timeline.title ;
 
     let tplSubject = timeline.subject && timeline.subject.id ? (<LCSubjectItem navigator={this.props.navigator} subject={timeline.subject} />) : null ;
-    let tplTitle = timelineText ? <Text style={styles.timelineText} allowFontScaling={false}>{tplSubject}{global.getEmotionContents(timelineText)}</Text> : null ;
+
+
+    //
+    let tplTitle = timelineText ? <Text style={styles.timelineText} allowFontScaling={false}>{tplSubject}{this.getEmotionContents(timelineText)}</Text> : null ;
+
     let tplImages = images && images.sum ? <LCTimelineImages navigator={this.props.navigator} oneImageInCenter={true} images={images.list} /> : null ;
     let tplDigs = this._renderDigs(digs) ;
     let tplComments = null ;
@@ -144,7 +158,7 @@ export default class LCTimelineItem extends Component {
           {tplComments}
         </View>
       </View>
-      : false ;
+      : null ;
 
     let tplOps = (
       <View style={[styles.flexRow,styles.timelineOps,styles.flex,styles.plr10]}>

@@ -1,9 +1,9 @@
-import React, {
-  Component,
+import React, { Component } from 'react';
+import {
   StyleSheet,
-  View
+  View,
+  Dimensions
 } from 'react-native';
-
 
 import {IndicatorViewPager, PagerTitleIndicator} from 'rn-viewpager';
 
@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
   indicator:{
     position:'absolute',
     top:20,
-    width:React.Dimensions.get('window').width,
+    width:Dimensions.get('window').width,
     height:45,
     backgroundColor:'#f9f9f9',
     borderBottomWidth:1,

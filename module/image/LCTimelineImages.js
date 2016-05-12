@@ -1,9 +1,10 @@
-import React, {
-  Component,
+import React,{ Component } from 'react' ;
+import {
   StyleSheet,
   TouchableOpacity,
   View,
-  Image
+  Image,
+  Dimensions
 } from 'react-native';
 
 import { Navigation } from 'react-native-navigation';
@@ -40,7 +41,7 @@ export default class LCTimelineImages extends Component {
     if(!images) images = [] ;
     let imagesSize = images.length ;
 
-    let PWidth = this.props.pwidth ? this.props.pwidth : React.Dimensions.get('window').width ;
+    let PWidth = this.props.pwidth ? this.props.pwidth : Dimensions.get('window').width ;
 
     let wrapStyle = [styles.images,styles['images'+imagesSize]] ;
     let tplImages = [] ;

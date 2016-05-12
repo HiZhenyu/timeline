@@ -1,6 +1,8 @@
-import React, {
+import React from 'react' ;
+import {
   StyleSheet,
 } from 'react-native';
+
 
 import LCPage from './../LCPage' ;
 

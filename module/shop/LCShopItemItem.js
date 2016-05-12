@@ -1,10 +1,11 @@
-import React, {
-  Component,
+import React,{ Component } from 'react' ;
+import {
   StyleSheet,
   TouchableHighlight ,
   View,
   Text,
   Image,
+  Dimensions
 } from 'react-native';
 
 
@@ -81,7 +82,7 @@ export default class LCCatItem extends Component {
 
 }
 
-const itemWidth = (React.Dimensions.get('window').width - 20) / 2;
+const itemWidth = (Dimensions.get('window').width - 20) / 2;
 var styles = StyleSheet.create({
   wrap:{
     flexDirection:'row',
@@ -123,7 +124,7 @@ var styles = StyleSheet.create({
     fontSize:12,
     textAlign:'right',
   },
-  
+
   hitem:{
     padding:5,
     borderBottomWidth:1,

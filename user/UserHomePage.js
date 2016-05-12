@@ -1,5 +1,5 @@
 import React, {
-} from 'react-native';
+} from 'react';
 
 import LCTitle from './../module/pub/LCTitle' ;
 import LCMoreLine from './../module/pub/LCMoreLine' ;

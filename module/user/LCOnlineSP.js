@@ -1,10 +1,11 @@
-import React, {
-  Component,
+import React,{ Component } from 'react' ;
+import {
   StyleSheet,
   TouchableHighlight ,
   View,
   Text,
-  Image
+  Image,
+  Dimensions
 } from 'react-native';
 
 
@@ -156,7 +157,7 @@ export default class LCOnlineSP extends Component {
 }
 
 
-const PWidth = React.Dimensions.get('window').width ;
+const PWidth = Dimensions.get('window').width ;
 const styles = StyleSheet.create({
     top:{
       backgroundColor:'#ff6600',

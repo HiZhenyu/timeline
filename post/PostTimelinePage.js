@@ -1,5 +1,5 @@
-import React, {
-  Component,
+import React,{ Component } from 'react' ;
+import {
   StyleSheet,
   TouchableOpacity ,
   View,
@@ -8,7 +8,8 @@ import React, {
   Image,
   CameraRoll,
   TextInput,
-  TouchableHighlight
+  TouchableHighlight,
+  Dimensions
 } from 'react-native';
 
 import GiftedSpinner from 'react-native-gifted-spinner' ;
@@ -244,9 +245,9 @@ export default class PostTimelinePage extends Component {
     let post = {} ;
 
     post.photo = [] ;
-    this.state.photos.map((it,i)=>post.photo.push({type: "image/jpeg", name: i+'x', uri: it.image.uri })) ;
+    this.state.photos.map((it,i)=>post['photo[]'] = {type: "image/jpeg", name: i+'x', uri: it.image.uri }) ;
 
-    global.v2iapi('timeline/post',post) ;
+    global.v2iapi('reply/upd',post) ;
   }
 
   render(){
@@ -336,7 +337,7 @@ class PostAPhoto extends Component {
 
 
 const rowNum = 4 ;
-const itemWidth = (React.Dimensions.get('window').width - 8*(rowNum+1)) / rowNum ;
+const itemWidth = (Dimensions.get('window').width - 8*(rowNum+1)) / rowNum ;
 const styles = StyleSheet.create({
   wrap:{
     flex:1,

@@ -1,4 +1,5 @@
-import React, {
+import React from 'react' ;
+import {
   StyleSheet,
 } from 'react-native';
 
@@ -18,7 +19,7 @@ export default class LCCommentList extends LCList {
     this.storeListSize = props.loadMore ? this.storeDefaultListSize : 0 ;
     this.postKeyMap = {ps:'ps',p:'p',timelineId:'timeline_id'} ;
     this.storageKey = 'comments' ;
-    this.storageExpires = 3600*1000 ;
+    this.storageExpires = 0 ;
     this.apiPath = 'reply/list' ;
 
     this.itemComponent = LCCommentItem ;

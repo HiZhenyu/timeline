@@ -1,10 +1,11 @@
-import React, {
-  Component,
+import React,{ Component } from 'react' ;
+import {
   StyleSheet,
   TouchableHighlight ,
   View,
   Text,
   Image,
+  Dimensions,
 } from 'react-native';
 
 
@@ -89,7 +90,7 @@ export default class LCCatItem extends Component {
 }
 
 
-var itemWidth = React.Dimensions.get('window').width/4 ;
+var itemWidth = Dimensions.get('window').width/4 ;
 var styles = StyleSheet.create({
   listItem:{
     justifyContent: 'center',

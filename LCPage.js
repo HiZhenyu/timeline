@@ -1,5 +1,5 @@
-import React, {
-  Component,
+import React, { Component } from 'react';
+import {
   StyleSheet,
   ScrollView,
   RefreshControl,
@@ -196,7 +196,7 @@ export default class LCPage extends Component {
 
      let fixedBottomTpl = null ;
      if(this.fixedBottomComponents.length > 0){
-       fixedTopTpl = (<View style={this.styleFixedBottomComponents}>
+       fixedBottomTpl = (<View style={this.styleFixedBottomComponents}>
           {this._renderComponents(this.fixedBottomComponents)}
         </View>) ;
      }

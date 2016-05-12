@@ -1,10 +1,11 @@
-import React, {
-  Component,
+import React,{ Component } from 'react' ;
+import {
   StyleSheet,
   TouchableHighlight ,
   View,
   Text,
-  Image
+  Image,
+  Dimensions
 } from 'react-native';
 
 import LCMFollow from './../op/LCMFollow' ;
@@ -62,7 +63,7 @@ export default class LCUserBigSP extends LCDetail {
   }
 }
 
-const PWidth = React.Dimensions.get('window').width ;
+const PWidth = Dimensions.get('window').width ;
 const styles = StyleSheet.create({
   topImage:{
     resizeMode:'cover',

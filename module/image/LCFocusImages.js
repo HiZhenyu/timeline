@@ -1,8 +1,10 @@
-import React, {
+import React,{ Component } from 'react' ;
+import {
   StyleSheet,
   TouchableHighlight ,
   View,
-  Image
+  Image,
+  Dimensions
 } from 'react-native';
 
 import {IndicatorViewPager, PagerDotIndicator} from 'rn-viewpager';
@@ -12,7 +14,7 @@ export default class LCFocusImages extends LCList {
   constructor(props) {
     super(props);
 
-    this.height = React.Dimensions.get('window').width*5/9 ;
+    this.height = Dimensions.get('window').width*5/9 ;
 
     this.defaultStoreListSize = 100 ;
     this.postKeyMap = {} ;

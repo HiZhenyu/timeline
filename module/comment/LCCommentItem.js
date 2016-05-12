@@ -1,10 +1,11 @@
-import React, {
-  Component,
+import React,{ Component } from 'react' ;
+import {
   StyleSheet,
   TouchableOpacity,
   Image,
   View,
-  Text
+  Text,
+  Dimensions
 } from 'react-native';
 
 import LCUser from './../user/LCUser' ;
@@ -18,15 +19,24 @@ export default class LCCommentItem extends Component {
     } ;
   }
 
+  getEmotionContents(content){
+    let es = global.getEmotionContents(content) ;
+
+    return es.map((it,i)=>{
+      if(it.component == 'Text') return <Text key={i} allowFontScaling={false}>{it.content}</Text> ;
+      if(it.component == 'Image') return <Image key={i} source={{uri:it.content,height:15,width:15}} />
+    }) ;
+  }
+
   render(){
     let comment = this.state.comment ;
     let {images,user} = comment ;
 
     let commentText = comment.content ? comment.content : comment.title ;
 
-    let pwidth = React.Dimensions.get('window').width - 60 ;
+    let pwidth = Dimensions.get('window').width - 60 ;
 
-    let tplTitle = commentText ? <Text style={styles.commentText} allowFontScaling={false}>{global.getEmotionContents(commentText)}</Text> : false ;
+    let tplTitle = commentText ? <Text style={styles.commentText} allowFontScaling={false}>{this.getEmotionContents(commentText)}</Text> : false ;
     let tplImages = images && images.sum ? <LCTimelineImages navigator={this.props.navigator} oneImageCenter={false} pwidth={pwidth} images={images.list} /> : false ;
 
     let style = [styles.item,styles.flex] ;
