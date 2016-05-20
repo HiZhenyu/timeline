@@ -18,7 +18,7 @@ export default class ShopItemPage extends LCPage {
       },
       {
         component : LCShopItemList ,
-        props : {ps : 4 ,styleId : 1} ,
+        props : {ps : 4 , itemStyleId:1 , style:{flexDirection:'row',flexWrap:'wrap'}} ,
       }
     ] ;
   }

@@ -106,8 +106,6 @@ export default class LCTimelineDetail extends Component {
     let style = [styles.wrap] ;
     if(this.props.style) style.push(this.props.style) ;
 
-//  //<View style={styles.tit}><Text style={styles.titText} allowFontScaling={false}>{shopItem.name}</Text></View>
-
     return (
       <View style={style}>
         <View style={styles.icon}><Image style={styles.image} source={{uri:global.getUploadURL(shopItem.icon)}} /></View>
@@ -122,7 +120,7 @@ export default class LCTimelineDetail extends Component {
             </View>
         </View>
         <LCTitle title={'商品详情'} />
-        <View style={styles.intro}><Text allowFontScaling={false}>{shopItem.info}</Text></View>
+        <View style={styles.intro}><Text style={styles.introText} allowFontScaling={false}>{shopItem.info}</Text></View>
       </View>) ;
   }
 }
@@ -189,5 +187,9 @@ const styles = StyleSheet.create({
   intro:{
     padding:10,
     backgroundColor:'#fff',
+  },
+  introText:{
+    fontSize:16,
+    lineHeight:20,
   }
 }) ;

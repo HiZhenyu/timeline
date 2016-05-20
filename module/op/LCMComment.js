@@ -1,7 +1,7 @@
 import React,{ Component } from 'react' ;
 import {
   StyleSheet,
-  TouchableHighlight ,
+  TouchableOpacity ,
   View,
   Text,
   Image
@@ -11,26 +11,41 @@ export default class LCMComment extends Component {
   constructor(props) {
     super(props) ;
 
-    var num = this.props.isum ? this.props.isum : 0 ;
-
     this.state = {
-      num: num
+      timeline: this.props.timeline ,
     } ;
   }
 
+  _onPress(){
+    if(!this.props.navigator) return ;
+    var props = {timeline:this.state.timeline,openReplyBar:true} ;
+
+    this.props.navigator.push({
+      screen: 'timeline.TimelinePage',
+      title: props.timeline.cat.name,
+      backButtonTitle: '返回',
+      passProps: props,
+      navigatorStyle: {
+        tabBarHidden: true,
+      } ,
+    });
+
+    return ;
+  }
+
   render(){
-    var style = [styles.flexRow] ;
+    var style = [] ;
     if(this.props.style) style.push(this.props.style) ;
 
-    var numText = this.state.num ? (<Text allowFontScaling={false}>({this.state.num})</Text>) : '' ;
+    var numText = this.state.timeline.comments.sum ? (<Text allowFontScaling={false}>({this.state.timeline.comments.sum})</Text>) : '' ;
 
     return (
-      <TouchableHighlight underlayColor="#ccc">
-        <View style={style}>
+      <TouchableOpacity onPress={this._onPress.bind(this)} style={style} underlayColor="#ccc">
+        <View style={styles.flexRow}>
           <Image style={styles.icon} source={require('./../../images/icon_comment.png')} />
           <Text style={styles.text} allowFontScaling={false}>评论{numText}</Text>
         </View>
-      </TouchableHighlight>
+      </TouchableOpacity>
     ) ;
   }
 }

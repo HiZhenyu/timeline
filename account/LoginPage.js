@@ -7,10 +7,10 @@ import {
   Image,
   ScrollView,
   TextInput,
-  Navigator
 } from 'react-native';
 
-import { Navigation } from 'react-native-navigation';
+import { Navigation } from 'react-native-navigation' ;
+import LCWeixinLogin from './../module/account/LCWeixinLogin' ;
 
 export default class LoginPageIn extends Component {
   constructor(props) {
@@ -42,7 +42,7 @@ export default class LoginPageIn extends Component {
   _onNavigatorEvent(event) {
     if (event.type == 'NavBarButtonPress') {
       if (event.id == 'id.account.close') {
-        Navigation.dismissModal({
+        this.props.navigator.dismissModal({
           animationType: 'slide-down',
           navigatorStyle:{
             statusBarHidden: true,
@@ -63,36 +63,16 @@ export default class LoginPageIn extends Component {
   _pressToRegister(){
     this.props.navigator.push({
       screen: 'account.RegisterPage',
-      passProps: {},
-      animated: true,
       title: '注册',
       backButtonTitle: '登录',
-      backButtonHidden: false,
-      navigatorStyle: {
-        tabBarHidden: true,
-        navBarBackgroundColor: '#f9f9f9',
-        navBarBackgroundColor: '#f9f9f9',
-        navBarButtonColor: '#555',
-      },
-      navigatorButtons: {}
     }) ;
   }
 
   _pressToPassword(){
     this.props.navigator.push({
       screen: 'account.PasswordPage',
-      passProps: {},
-      animated: true,
       title: '重设密码',
       backButtonTitle: '登录',
-      backButtonHidden: false,
-      navigatorStyle: {
-        tabBarHidden: true,
-        navBarBackgroundColor: '#f9f9f9',
-        navBarBackgroundColor: '#f9f9f9',
-        navBarButtonColor: '#555',
-      },
-      navigatorButtons: {}
     }) ;
   }
 
@@ -120,7 +100,7 @@ export default class LoginPageIn extends Component {
         }
 
         global.tip('登录成功',{hidden:()=>{
-          Navigation.dismissModal({
+          this.props.navigator.dismissModal({
             animationType: 'slide-down',
             navigatorStyle:{
               statusBarHidden: true,
@@ -140,18 +120,16 @@ export default class LoginPageIn extends Component {
     if(this.state.submitXing) submitBtnStyle.push(styles.btnSubmitIng) ;
 
     return (
-      <View style={{flex:1}}>
         <ScrollView style={[styles.backgroundGray]}>
-
           <View style={styles.form}>
             <View style={styles.formItem}>
               <Text allowFontScaling={false} style={styles.label}>手机号码</Text>
-              <TextInput style={[styles.input]} value={this.state.uname} keyboardType='phone-pad' onChangeText={(text) => this.setState({uname:text})} autoFocus={true} clearButtonMode='while-editing' placeholder="请输入您注册时的手机号" />
+              <TextInput style={[styles.input]} value={this.state.uname} keyboardType='phone-pad' onChangeText={(text) => this.setState({uname:text})} autoFocus={true} clearButtonMode="while-editing"  keyboardType="numeric" placeholder="请输入您注册时的手机号" />
             </View>
 
             <View style={[styles.formItem,styles.formItemLine]}>
               <Text allowFontScaling={false} style={styles.label}>登录密码</Text>
-              <TextInput style={[styles.input]} value={this.state.passwd} onChangeText={(text) => this.setState({passwd:text})} secureTextEntry={true} clearButtonMode='while-editing' placeholder="请输入您的登录密码" />
+              <TextInput style={[styles.input]} value={this.state.passwd} onChangeText={(text) => this.setState({passwd:text})} secureTextEntry={true} clearButtonMode="while-editing" placeholder="请输入您的登录密码" />
             </View>
           </View>
 
@@ -170,8 +148,8 @@ export default class LoginPageIn extends Component {
             </View>
           </View>
 
+          <LCWeixinLogin />
         </ScrollView>
-      </View>
     ) ;
   }
 }

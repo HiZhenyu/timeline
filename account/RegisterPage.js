@@ -27,7 +27,7 @@ export default class RegisterPage extends Component {
   }
 
   componentWillUnmount(){
-    if(this.state.smsCaptchaXing) clearInterval(this.smsCaptchaInterval) ;
+    if(this.smsCaptchaInterval) clearInterval(this.smsCaptchaInterval) ;
   }
 
   _pressToLogin(){
@@ -36,6 +36,7 @@ export default class RegisterPage extends Component {
 
   //获取验证码
   _presssToSmsCaptcha(){
+    if(this.state.smsCaptchaXing) return ;
     var post = {} ;
     post.phone = this.state.uname ;
     post.to = 'register' ;
@@ -76,8 +77,6 @@ export default class RegisterPage extends Component {
     post.passwd = this.state.passwd ;
     post.smscaptcha = this.state.smscaptcha ;
     post.name = this.state.name ;
-    post.uuid = DeviceInfo.getUniqueID() ;
-    post.ua = DeviceInfo.getUserAgent() ;
 
     if(!post.name)  return global.tip('请填写您的姓名！') ;
     if(!post.uname)  return global.tip('请填写您的手机号码！') ;
@@ -90,7 +89,7 @@ export default class RegisterPage extends Component {
         if(js.skey) storage.save({key: 'onlineskey',rawData: js.skey , expires: null }) ;
         if(js.online){
           storage.save({key: 'online',rawData: js.online , expires: null }) ;
-          Navigation.dismissModal({
+          this.props.navigator.dismissModal({
             animationType: 'slide-down',
             navigatorStyle:{
               statusBarHidden: true,
@@ -107,7 +106,7 @@ export default class RegisterPage extends Component {
 
   render(){
     return (
-      <View style={{flex:1}}>
+
         <ScrollView style={[styles.backgroundGray]}>
 
           <View style={styles.form}>
@@ -118,12 +117,12 @@ export default class RegisterPage extends Component {
 
             <View style={[styles.formItem,styles.formItemLine]}>
               <Text allowFontScaling={false} style={styles.label}>手机号码</Text>
-              <TextInput style={[styles.input]} value={this.state.uname} onChangeText={(text) => this.setState({uname:text})} clearButtonMode='while-editing' placeholder="输入您的手机号" />
+              <TextInput style={[styles.input]} value={this.state.uname} onChangeText={(text) => this.setState({uname:text})} clearButtonMode='while-editing' keyboardType="numeric" placeholder="输入您的手机号" />
             </View>
 
             <View style={[styles.formItem,styles.formItemLine]}>
               <Text allowFontScaling={false} style={styles.label}>短信验证码</Text>
-              <TextInput style={[styles.input]} value={this.state.smscaptcha} onChangeText={(text) => this.setState({smscaptcha:text})} clearButtonMode='while-editing' placeholder="短信验证码" />
+              <TextInput style={[styles.input]} value={this.state.smscaptcha} onChangeText={(text) => this.setState({smscaptcha:text})} clearButtonMode='while-editing' keyboardType="numeric" placeholder="短信验证码" />
               <TouchableHighlight underlayColor='#ccc' style={styles.smscaptchaBtn} disabled={this.state.smsCaptchaXing} onPress={this._presssToSmsCaptcha.bind(this)}><Text style={styles.smscaptchaText} allowFontScaling={false}>{this.state.smscaptchaText}</Text></TouchableHighlight>
             </View>
 
@@ -146,7 +145,7 @@ export default class RegisterPage extends Component {
           </View>
 
         </ScrollView>
-      </View>
+
     ) ;
   }
 }

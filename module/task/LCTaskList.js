@@ -15,7 +15,7 @@ export default class LCTaskList extends LCList {
     this.storageKey = 'task'+this.props.gnames ;
     this.storageExpires = 0 ;
     this.apiPath = 'task/'+this.props.gnames ;
-
+    
     this.itemComponent = LCTaskListItem ;
     this.itemComponentKey = 'id' ;
     this.itemComponentDataName = 'task' ;

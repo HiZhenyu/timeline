@@ -26,6 +26,17 @@ export default class LCTimelineDetail extends LCDetail {
     this.apiPath = 'timeline/detail' ;
   }
 
+  _onSuccDig(digUser){
+    let timeline = this.state.timeline ;
+    if(!timeline.dig) timeline.dig = {} ;
+    timeline.dig.did = true ;
+
+    if(!timeline.digs) timeline.digs = {list:[]} ;
+    if(!timeline.digs.list) timeline.digs.list = [] ;
+    timeline.digs.list.push(digUser) ;
+
+    this.setState({timeline}) ;
+  }
 
   _renderDigs(digs){
     if(!digs || !digs.list || digs.list.length < 1) return ;
@@ -75,7 +86,10 @@ export default class LCTimelineDetail extends LCDetail {
             digImageStyle={{width:25,height:25,marginRight:5}}
             digTextStyle={{fontSize:16}}
             timelineId={timeline.id}
-            isum={timeline.dig.sum} />
+            did={timeline.dig.did}
+            num={timeline.dig.sum}
+            onSucc={this._onSuccDig.bind(this)}
+            />
         </View>
         {digsTpl}
       </View>

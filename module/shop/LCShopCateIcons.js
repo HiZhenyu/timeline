@@ -25,17 +25,8 @@ export default class LCShopCateIcons extends Component {
     this.props.navigator.push({
       screen: 'shop.ShopItemListMainPage',
       passProps: props,
-      animated: true,
       backButtonTitle: '返回',
       title: '金币商城' ,
-      backButtonHidden: false,
-      navigatorStyle: {
-        tabBarHidden: true,
-        navBarBackgroundColor: '#f9f9f9',
-        navBarBackgroundColor: '#f9f9f9',
-        navBarButtonColor: '#555',
-      },
-      navigatorButtons: {}
     });
 
   }

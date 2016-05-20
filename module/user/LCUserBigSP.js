@@ -37,7 +37,7 @@ export default class LCUserBigSP extends LCDetail {
           <View style={styles.userIntroL}>
             <LCMFollow
               navigator={this.props.navigator}
-              user={user}
+              uid={user.uid}
               doUpdate={this.state.doUserFollow}
               updateCallback={(js)=>this.setState({doUserFollow:false})}
             />

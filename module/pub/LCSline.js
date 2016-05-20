@@ -4,49 +4,50 @@ import {
   TouchableHighlight,
   View,
   Image,
-  Text
+  Text,
+  Dimensions
 } from 'react-native';
 
 export default class LCSline extends Component {
+  static defaultProps = {
+    lines : [],
+  } ;
+
   constructor(props) {
     super(props) ;
-    this.state = {
-    };
+    this.state = {} ;
+    this.state.lines = this.props.lines ;
+  }
 
-    this.lines = [] ;
-    if(props.lines) this.lines = props.lines ;
-    if(props.title){
-        var aline = {} ;
-        aline.title = props.title ;
-        if(props.icon) aline.icon = props.icon ;
-        if(props.onPress) aline.onPress = props.onPress ;
-
-        this.lines.push(aline) ;
-    }
+  componentWillReceiveProps(nextProps){
+    if(this.props.lines !== nextProps.lines) this.setState({lines:nextProps.lines}) ;
   }
 
   render(){
-    var tpls = [] ;
-    for(var i=0;i<this.lines.length;i++){
-      var aline = this.lines[i] ;
-      var icon = aline.icon ? <Image style={styles.icon} source={aline.icon} /> : false ;
-      var styleItemOth = i == this.lines.length - 1 ? styles.itemLast:styles.itemC ;
-      var onPressFn = aline.onPress ? aline.onPress : ()=>{} ;
+    let styleIcon = [styles.icon] ;
+    if(this.props.styleIcon) styleIcon.push(this.props.styleIcon) ;
 
-      var atpl = (
-        <TouchableHighlight key={i} onPress={onPressFn} underlayColor='#ddd' style={styles.itemWrap}>
+    let tpls = this.state.lines.map((aline,i)=>{
+      let icon = aline.icon ? <Image style={styleIcon} source={aline.icon} /> : null ;
+      let styleItemOth = (i == this.state.lines.length - 1) ? styles.itemLast:styles.itemC ;
+      let rightText = aline.rightText ? <Text numberOfLines={1} style={styles.rightText} allowFontScaling={false}>{aline.rightText}</Text> : null ;
+      let rightIcon = aline.onPress ? <Image style={styles.iconTo} source={require('./../../images/icon_dirto.png')} /> : <View style={styles.iconTo} /> ;
+
+      let akey = i+'_'+aline.title+'_'+ (aline.rightText ? aline.rightText:'') ;
+      return (
+        <TouchableHighlight key={akey} onPress={aline.onPress} underlayColor='#ddd' style={styles.itemWrap}>
           <View style={[styles.item,styleItemOth]}>
             {icon}
-            <Text style={styles.title} allowFontScaling={false}>{aline.title}</Text>
-            <Image style={styles.iconTo} source={require('./../../images/icon_dirto.png')} />
+            <Text style={styles.titleText} allowFontScaling={false}>{aline.title}</Text>
+            {rightText}
+            {aline.rightComponent}
+            {rightIcon}
           </View>
         </TouchableHighlight>
       ) ;
+    }) ;
 
-      tpls.push(atpl) ;
-    }
-
-    var styleWrap = [styles.wrap] ;
+    let styleWrap = [styles.wrap] ;
     if(this.props.style) styleWrap.push(this.props.style) ;
 
     return (
@@ -57,6 +58,9 @@ export default class LCSline extends Component {
   }
 }
 
+
+
+const PWidth = Dimensions.get('window').width;
 const styles = StyleSheet.create({
   wrap:{
     borderBottomColor:'#ddd',
@@ -73,16 +77,22 @@ const styles = StyleSheet.create({
     paddingTop:5,
     paddingBottom:5,
     borderBottomWidth:1,
-    height:40,
+    height:45,
     borderBottomColor:'#eee',
     alignItems:'center'
   },
   itemLast:{
     borderBottomWidth:0,
   },
-  title:{
+  titleText:{
     flex:1,
     fontSize:16,
+  },
+  rightText:{
+    fontSize:14,
+    color:'#999',
+    width:PWidth*0.6,
+    textAlign:'right',
   },
   icon:{
     width:20,
@@ -91,7 +101,9 @@ const styles = StyleSheet.create({
     justifyContent:'center'
   },
   iconTo:{
+    marginLeft:10,
     marginRight:10,
+    width:8,
   }
 
 }) ;

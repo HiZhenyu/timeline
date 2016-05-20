@@ -9,6 +9,9 @@ import LCCatItem from './../cat/LCCatItem' ;
 export default class LCUserCats extends LCList {
   static defaultProps = {
     user: {},
+    itemStyleId : 1,
+    itemComponent : LCCatItem ,
+    itemComponentProps : {},
   } ;
 
   constructor(props) {
@@ -21,20 +24,19 @@ export default class LCUserCats extends LCList {
     this.storageExpires = 3600*1000 ;
     this.apiPath = 'user/cats' ;
 
-    this.itemComponent = LCCatItem ;
+    this.itemComponent = this.props.itemComponent ;
     this.itemComponentKey = 'id' ;
     this.itemComponentDataName = 'cat' ;
-    this.itemComponentProps = {styleId:1,style:styles.catItem,uid:this.props.uid} ;
+    this.itemComponentProps = {styleId:this.props.itemStyleId,style:styles.catItem,uid:this.props.user.uid} ;
+
+    //可以通过参数传进来
+    Object.keys(this.props.itemComponentProps).map(it=>this.itemComponentProps[it]=this.props.itemComponentProps[it]) ;
 
     this.thatsAllText = '' ;
     this.emptyDataSourceText = '暂时没有加入任何机友会...' ;
 
     this.styleEmptyView = styles.emptyView ;
-    this.style = [styles.hlist,this.state.astyle] ;
-  }
-
-  setStyleTop(style){
-    this.setState({astyle:style}) ;
+    this.style = [styles.hlist,this.state.astyle,this.props.style] ;
   }
 }
 

@@ -58,18 +58,8 @@ export default class ExploreIndexPage extends LCPage {
     //使用Navigation方案
     this.props.navigator.push({
       screen: 'cat.CatHotPage',
-      passProps: props,
-      animated: true,
       title: '热门机友会',
       backButtonTitle: '返回',
-      backButtonHidden: false,
-      navigatorStyle: {
-        tabBarHidden: true,
-        navBarBackgroundColor: '#f9f9f9',
-        navBarBackgroundColor: '#f9f9f9',
-        navBarButtonColor: '#555',
-      },
-      navigatorButtons: {}
     });
   }
 }

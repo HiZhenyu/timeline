@@ -5,7 +5,7 @@ import {
   Dimensions
 } from 'react-native';
 
-import {IndicatorViewPager, PagerTitleIndicator} from 'rn-viewpager';
+import {IndicatorViewPager, PagerTitleIndicator} from './module/pub/rn-viewpager/index';
 
 export default class LCTTabPage extends Component {
   constructor(props) {
@@ -69,6 +69,8 @@ export default class LCTTabPage extends Component {
           ref={ref=>this.refViewPager=ref}
           scrollsToTop={false}
           style={style}
+          bounces={false}
+          keyboardDismissMode="on-drag"
           indicator={<PagerTitleIndicator
             style={indicatorStyle}
             itemTextStyle={{fontSize:16}}

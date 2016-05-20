@@ -26,7 +26,7 @@ export default class PasswordPage extends Component {
   }
 
   componentWillUnmount(){
-    if(this.state.smsCaptchaXing) clearInterval(this.smsCaptchaInterval) ;
+    if(this.smsCaptchaInterval) clearInterval(this.smsCaptchaInterval) ;
   }
 
   _pressToLogin(){
@@ -35,10 +35,10 @@ export default class PasswordPage extends Component {
 
   //获取验证码
   _presssToSmsCaptcha(){
+    if(this.state.smsCaptchaXing) return ;
     var post = {} ;
     post.phone = this.state.uname ;
     post.to = 'passwd' ;
-    post.uuid = DeviceInfo.getUniqueID() ;
 
     if(!post.phone){
       global.tip('请输入您的手机号') ;
@@ -94,19 +94,19 @@ export default class PasswordPage extends Component {
 
   render(){
     return (
-      <View style={{flex:1}}>
+
         <ScrollView style={[styles.backgroundGray]}>
 
           <View style={styles.form}>
 
-            <View style={[styles.formItem,styles.formItemLine]}>
+            <View style={[styles.formItem]}>
               <Text allowFontScaling={false} style={styles.label}>手机号码</Text>
-              <TextInput style={[styles.input]} value={this.state.uname} onChangeText={(text) => this.setState({uname:text})} clearButtonMode='while-editing' placeholder="输入您的手机号" />
+              <TextInput style={[styles.input]} value={this.state.uname} onChangeText={(text) => this.setState({uname:text})} clearButtonMode='while-editing' keyboardType="numeric" placeholder="输入您的手机号" />
             </View>
 
             <View style={[styles.formItem,styles.formItemLine]}>
               <Text allowFontScaling={false} style={styles.label}>短信验证码</Text>
-              <TextInput style={[styles.input]} value={this.state.smscaptcha} onChangeText={(text) => this.setState({smscaptcha:text})} clearButtonMode='while-editing' placeholder="短信验证码" />
+              <TextInput style={[styles.input]} value={this.state.smscaptcha} onChangeText={(text) => this.setState({smscaptcha:text})} clearButtonMode='while-editing' keyboardType="numeric" placeholder="短信验证码" />
               <TouchableHighlight underlayColor='#ccc' style={styles.smscaptchaBtn} disabled={this.state.smsCaptchaXing} onPress={this._presssToSmsCaptcha.bind(this)}><Text style={styles.smscaptchaText} allowFontScaling={false}>{this.state.smscaptchaText}</Text></TouchableHighlight>
             </View>
 
@@ -129,7 +129,7 @@ export default class PasswordPage extends Component {
           </View>
 
         </ScrollView>
-      </View>
+
     ) ;
   }
 }

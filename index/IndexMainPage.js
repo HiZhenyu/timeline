@@ -13,7 +13,7 @@ export default class IndexMainPage extends LCTTabPage {
       {
         component : TodayNewsPage ,
         label : '今日动态' ,
-        key : 'TodayNewsPage'
+        key : 'TodayNewsPage',
       },
       {
         component : FollowFeedPage ,

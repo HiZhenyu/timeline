@@ -3,6 +3,7 @@ import {
   StyleSheet,
   TouchableHighlight ,
   TouchableOpacity ,
+  TouchableWithoutFeedback,
   View,
   Text,
   Image,
@@ -13,7 +14,8 @@ import {
 } from 'react-native';
 
 import InvertibleScrollView from 'react-native-invertible-scroll-view';
-import GiftedSpinner from 'react-native-gifted-spinner' ;
+import * as Animatable from 'react-native-animatable' ;
+import GiftedSpinner from './../module/pub/GiftedSpinner' ;
 import { Navigation } from 'react-native-navigation';
 
 export default class SelectPhotosPage extends Component {
@@ -41,11 +43,38 @@ export default class SelectPhotosPage extends Component {
     this.selectedItems = {} ;
 
     //默认值
-    props.selectedPhotos.map(it=>this.selectedItems[it]={image:{uri:it},checked:true}) ;
+    props.selectedPhotos.map(it=>{
+      it.checked = true ;
+      this.selectedItems[it.image.uri]=it ;
+    }) ;
 
     this.list = [] ;
     this.lastCursor = (null : ?string) ;
+
+    this.props.navigator.setOnNavigatorEvent(this._onNavigatorEvent.bind(this));
   }
+
+  static navigatorButtons= {
+    rightButtons: [
+      {
+        title: '取消',
+        id: 'id.cancel',
+      }
+    ]
+  } ;
+
+  _onNavigatorEvent(e){
+    if(e.type == 'NavBarButtonPress'){
+      if(e.id == 'id.cancel'){
+        let navigator = this.props.navigator ? this.props.navigator : Navigation ;
+        navigator.dismissModal({
+          animationType: 'slide-down',
+        });
+      }
+    }
+  }
+
+
 
   componentDidMount() {
     this._doMount();
@@ -165,10 +194,14 @@ export default class SelectPhotosPage extends Component {
   }
 
   onPressToFinish(){
-    if(global.onSuccSelected){
-      this.props.navigator.pop() ;
-      global.onSuccSelected(this.getSelectedItems(),...arguments) ;
-      delete global.onSuccSelected ;
+    let navigator = this.props.navigator ? this.props.navigator : Navigation ;
+    navigator.dismissModal({
+      animationType: 'slide-down',
+    });
+
+    if(global.onPhotoSuccSelected){
+      global.onPhotoSuccSelected(this.getSelectedItems(),...arguments) ;
+      delete global.onPhotoSuccSelected ;
     }
   }
 
@@ -184,7 +217,7 @@ export default class SelectPhotosPage extends Component {
     let btnToFinish = null ;
 
     if(this.state.selectedCount){
-      selectNumTpl = <Image style={styles.iconBtn}><Text style={styles.iconBtnText} allowFontScaling={false}>{this.state.selectedCount}</Text></Image> ;
+      selectNumTpl = <Animatable.Image key={this.state.selectedCount} animation="bounceIn" style={styles.iconBtn}><Text style={styles.iconBtnText} allowFontScaling={false}>{this.state.selectedCount}</Text></Animatable.Image> ;
       styleBtnLText.push(styles.btnLText) ;
       styleBtnRText.push(styles.btnRText) ;
 
@@ -238,14 +271,14 @@ class LCSelectPhotosPItem extends Component {
 
   render(){
     let photo = this.state.photo ;
-    let checkImageIcon = require('./../images/icon_check.png') ;
-    photo.checked && (checkImageIcon = require('./../images/icon_checked.png'));
+    let checkImageTpl = <Image style={styles.itemCheckIcon} source={require('./../images/icon_check.png')} /> ;
+    photo.checked && (checkImageTpl = <Animatable.Image animation="bounceIn" style={styles.itemCheckIcon} source={require('./../images/icon_checked.png')} />);
 
     return (
       <TouchableHighlight style={styles.item} underlayColor="#eee" onPress={this._onPress.bind(this)}>
         <View>
           <Image source={photo.image} style={styles.itemImage} />
-          <Image style={styles.itemCheckIcon} source={checkImageIcon} />
+          {checkImageTpl}
         </View>
       </TouchableHighlight>
     ) ;
@@ -256,7 +289,11 @@ class LCSelectPhotosPItem extends Component {
     let photo = this.state.photo ;
     photo.checked = !photo.checked ;
 
-    if(!this.props.mainComponent.onCheck(photo)) return false ;
+    if(!this.props.mainComponent.onCheck(photo)){
+      photo.checked = !photo.checked ;
+      return false ;
+    }
+
     this.setState({photo:photo}) ;
   }
 }
@@ -293,32 +330,13 @@ const styles = StyleSheet.create({
     resizeMode: 'cover' ,
   } ,
 
-  itemPopNum:{
-    backgroundColor:'#ff6600',
-    borderRadius:12,
-    width:24,
-    height:24,
-    borderColor:'#fff',
-    borderWidth:1,
-    position:'relative',
-    top:-itemWidth + 5,
-    left:itemWidth - 25,
-  } ,
-
   itemCheckIcon:{
     width:18,
     height:18,
-    position:'relative',
-    top:-itemWidth + 5,
-    left:itemWidth - 25,
+    position:'absolute',
+    top:3,
+    right:3,
   } ,
-
-  itemPopNumText:{
-    color:'#fff',
-    textAlign:'center',
-    lineHeight:16,
-    fontSize:12
-  },
 
   bottomBar:{
     height:45,

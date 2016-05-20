@@ -7,11 +7,14 @@ import {
   Text,
 } from 'react-native';
 
-import GiftedSpinner from 'react-native-gifted-spinner' ;
+import GiftedSpinner from './module/pub/GiftedSpinner' ;
 
 class IScrollView extends Component {
   constructor(props) {
     super(props) ;
+    this.state = {
+      didMount : false ,
+    } ;
   }
 
   componentWillReceiveProps(nextProps){
@@ -27,6 +30,10 @@ class IScrollView extends Component {
   }
 
   _doUpdate(cb){
+    if(!this.state.didMount && this.props.onDidMount){
+      this.setState({didMount:true}) ;
+      this.props.onDidMount() ;
+    }
     cb && cb() ;
   }
 
@@ -144,8 +151,10 @@ export default class LCPage extends Component {
         it.props.updateCallback = (()=>this._updateRefreshUp(up)) ;
       }
 
+      it.props.navigator = this.props.navigator ;
       it.props.key = it.key ? it.key : i ;
-      return <it.component navigator={this.props.navigator} {...it.props}  />
+
+      return <it.component {...it.props}  />
     }) ;
   }
 
@@ -172,7 +181,6 @@ export default class LCPage extends Component {
       navigator={this.props.navigator}
       renderHeader={this.renderHeader.bind(this)}
       scrollsToTop={this.state.scrollsToTop}
-
       style={styles.backgroundGray}
 
       doUpdate={this.state.ups.mainView}
@@ -213,7 +221,7 @@ export default class LCPage extends Component {
 
 const styles = StyleSheet.create({
   backgroundGray:{
-    backgroundColor:'#efefef'
+    backgroundColor:'#efefef',
   } ,
   spinner:{
     height:50,

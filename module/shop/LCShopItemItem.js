@@ -22,17 +22,8 @@ export default class LCCatItem extends Component {
     this.props.navigator.push({
       screen: 'shop.ShopItemPage',
       passProps: props,
-      animated: true,
       title: props.shopItem.name ,
       backButtonTitle: '返回',
-      backButtonHidden: false,
-      navigatorStyle: {
-        tabBarHidden: true,
-        navBarBackgroundColor: '#f9f9f9',
-        navBarBackgroundColor: '#f9f9f9',
-        navBarButtonColor: '#555',
-      },
-      navigatorButtons: {}
     });
 
   }
@@ -82,7 +73,7 @@ export default class LCCatItem extends Component {
 
 }
 
-const itemWidth = (Dimensions.get('window').width - 20) / 2;
+const itemWidth = (Dimensions.get('window').width) / 2;
 var styles = StyleSheet.create({
   wrap:{
     flexDirection:'row',
@@ -91,12 +82,14 @@ var styles = StyleSheet.create({
 
   itemWrap:{
     width:itemWidth,
-    margin:5,
+
   },
 
   item:{
-    padding:5,
+    padding:10,
     borderWidth:1,
+    borderTopWidth:0,
+    borderLeftWidth:0,
     borderColor:'#eee',
     backgroundColor:'#fff',
   },

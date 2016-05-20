@@ -25,7 +25,7 @@ export default class LCCommentList extends LCList {
     this.itemComponent = LCCommentItem ;
     this.itemComponentKey = 'id' ;
     this.itemComponentDataName = 'comment' ;
-    this.itemComponentProps = {style:styles.commentItem} ;
+    this.itemComponentProps = {style:styles.commentItem,onPressReplyTo:this.props.onItemPressReplyTo} ;
 
     this.thatsAllText = '没有更多评论了' ;
     this.emptyDataSourceText = '' ;

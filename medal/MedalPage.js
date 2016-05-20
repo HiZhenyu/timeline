@@ -59,17 +59,8 @@ export default class MedalPage extends LCPage {
     this.props.navigator.push({
       screen: 'medal.MedalUserListPage',
       passProps: props,
-      animated: true,
       title: '拥有该勋章的机友们',
       backButtonTitle: '返回',
-      backButtonHidden: false,
-      navigatorStyle: {
-        tabBarHidden: true,
-        navBarBackgroundColor: '#f9f9f9',
-        navBarBackgroundColor: '#f9f9f9',
-        navBarButtonColor: '#555',
-      },
-      navigatorButtons: {}
     });
   }
 }

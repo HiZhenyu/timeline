@@ -5,79 +5,21 @@ import {
   Text
 } from 'react-native';
 
-export default class LCMFollow extends Component {
+import LCDid from './../LCDid' ;
+
+export default class LCMFollow extends LCDid {
   constructor(props) {
     super(props) ;
 
-    this.state = {
-      user : this.props.user,
+    this.check = {
+      api : 'userfollow/isfollow',
+      data : {uid : this.props.uid} ,
     } ;
-  }
 
-  componentWillReceiveProps(nextProps){
-    if(!this.props.doUpdate && nextProps.doUpdate) this._fetch(nextProps.updateCallback ? nextProps.updateCallback:null) ;
-    if(this.props.holdOn && !nextProps.holdOn) return this._doMount() ;
-  }
-
-  componentDidMount() {
-    if(this.props.holdOn) return null ;
-    return this._doMount() ;
-  }
-
-  componentWillUnmount() {
-    this.unmount = true ;
-  }
-
-  _doMount(){
-    if(!this.state.user || !this.state.user.uid) return ;
-    return this._fetch() ;
-  }
-
-  //获取当前状态
-  _fetch(){
-    var online = global.getOnline() ;
-    v2iapi('userfollow/isfollow',{uid:this.state.user.uid},{
-      succ:(js)=>{
-        if(!js.uid) return ;
-        this._doAssets(js) ;
-      },
-      ever:(js)=>{
-
-      },
-      fail:(js)=>{
-
-      }
-    }) ;
-  }
-
-  _onPress(){
-    if(this.digXing) return ;
-
-    var online = global.getOnline() ;
-    if(!online.uid){
-      global.toLogin() ;
-      return ;
-    }
-
-    if(this.state.did) return ;
-
-    this.setState({doing:true}) ;
-    this.digXing = true ;
-    v2iapi('userfollow/add',{uid:this.state.user.uid},{
-      succ:(js)=>{
-        this._doAssets(js) ;
-      },
-      ever:(js)=>{
-        this.digXing = false ;
-        if(!js || !js.code || js.code != '200') this.setState({did:false}) ;
-      }
-    }) ;
-  }
-
-  _doAssets(js) {
-    if(this.unmount) return ;
-
-    this.setState({did:true}) ;
+    this.dodid = {
+      api : 'userfollow/add' ,
+      data : {uid : this.props.uid} ,
+    } ;
   }
 
   render(){

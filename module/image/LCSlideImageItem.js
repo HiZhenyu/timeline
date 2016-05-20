@@ -9,7 +9,7 @@ import {
   TouchableWithoutFeedback
 } from 'react-native';
 
-import GiftedSpinner from 'react-native-gifted-spinner' ;
+import GiftedSpinner from './../pub/GiftedSpinner' ;
 import { Navigation } from 'react-native-navigation';
 
 export default class LCSlideImageItem extends Component {
@@ -64,11 +64,9 @@ export default class LCSlideImageItem extends Component {
   }
 
   _onPress(){
-    Navigation.dismissModal({
+    let navigator = this.props.navigator ? this.props.navigator : Navigation ;
+    navigator.dismissModal({
       animationType: 'slide-down',
-      navigatorStyle:{
-        statusBarHidden: true,
-      }
     });
   }
 
@@ -84,11 +82,13 @@ export default class LCSlideImageItem extends Component {
     let imageSource = image.icon ? {uri:global.getUploadURL(image.icon)} : image ;
     var loader = this.state.loading ?  <GiftedSpinner /> : null ;
 
+    let style = [styles.wrap] ;
+    this.props.style && style.push(this.props.style) ;
     return (
       <ScrollView
         alwaysBounceVertical={false}
         alwaysBounceHorizontal={false}
-        contentContainerStyle={this.props.style}
+        contentContainerStyle={style}
         showsHorizontalScrollIndicator={false}
         showsVerticalScrollIndicator={false}
         minimumZoomScale={1.0}

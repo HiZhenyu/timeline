@@ -12,7 +12,7 @@ export default class TodayNewsPage extends LCPage {
     this.mainView = LCTimelineList ;
 
     this.mainViewProps = {
-      loadMore : true ,
+      loadMore : true
     } ;
 
     let online = global.getOnline() ;
@@ -37,6 +37,8 @@ export default class TodayNewsPage extends LCPage {
       },
     ] ;
   }
+
+
 
   /*
   _onUserCatsViewLayout(e){

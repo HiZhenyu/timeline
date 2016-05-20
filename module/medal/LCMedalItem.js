@@ -24,17 +24,8 @@ export default class LCMedalItem extends Component {
     this.props.navigator.push({
       screen: 'medal.MedalPage',
       passProps: props,
-      animated: true,
       title: props.medal.name ,
       backButtonTitle: '返回',
-      backButtonHidden: false,
-      navigatorStyle: {
-        tabBarHidden: true,
-        navBarBackgroundColor: '#f9f9f9',
-        navBarBackgroundColor: '#f9f9f9',
-        navBarButtonColor: '#555',
-      },
-      navigatorButtons: {}
     });
   }
 

@@ -8,7 +8,7 @@ import {
   Text
 } from 'react-native';
 
-import GiftedSpinner from 'react-native-gifted-spinner' ;
+import GiftedSpinner from './../module/pub/GiftedSpinner' ;
 
 
 export default class CatListPage extends Component {

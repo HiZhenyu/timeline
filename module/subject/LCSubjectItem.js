@@ -25,17 +25,11 @@ export default class LCSubject extends Component {
     this.props.navigator.push({
       screen: 'subject.SubjectPage',
       passProps: props,
-      animated: true,
       title: '话题与活动' ,
       backButtonTitle: '返回',
-      backButtonHidden: false,
       navigatorStyle: {
         tabBarHidden: true,
-        navBarBackgroundColor: '#f9f9f9',
-        navBarBackgroundColor: '#f9f9f9',
-        navBarButtonColor: '#555',
-      },
-      navigatorButtons: {}
+      } ,
     });
   }
 

@@ -14,6 +14,6 @@ export default class TaskListPage extends LCPage {
       ps : 10 ,
       gnames : gnames
     } ;
-
+    
   }
 }

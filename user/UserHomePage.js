@@ -66,19 +66,9 @@ export default class UserHomePage extends LCPage {
     //使用Navigation方案
     this.props.navigator.push({
       screen: 'user.UserTimelinePage',
-      title: undefined,
       passProps: props,
-      animated: true,
       backButtonTitle: '返回',
       title: props.user.name + '的动态' ,
-      backButtonHidden: false,
-      navigatorStyle: {
-        tabBarHidden: true,
-        navBarBackgroundColor: '#f9f9f9',
-        navBarBackgroundColor: '#f9f9f9',
-        navBarButtonColor: '#555',
-      },
-      navigatorButtons: {}
     });
 
   }

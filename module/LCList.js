@@ -6,7 +6,8 @@ import {
   Text,
 } from 'react-native';
 
-import GiftedSpinner from 'react-native-gifted-spinner' ;
+import GiftedSpinner from './pub/GiftedSpinner' ;
+import SGListView from './pub/sglistview/SGListView' ;
 
 /**
  * 提供统一功能的列表模块
@@ -218,6 +219,8 @@ export default class LCList extends Component {
         ever:(js)=>{
           callback && callback(js) ;
           this.loading = false ;
+
+          if(!js || !js.code || js.code != '200') this._doAssets({list:[]}) ;
         }
       }) ;
     } ;
@@ -249,6 +252,7 @@ export default class LCList extends Component {
 
   _doReset(){
     if(this.postKeyMap.p) this.p = this.props.p ? this.props.p : 1 ;
+    else this.p = 0 ;
 
     this.list = [] ;
     this.storeList = { p:1 , psum:2 , list:[] , sum:0 } ;
@@ -274,7 +278,11 @@ export default class LCList extends Component {
     //将总数也存起来吧
     newState.sum = js.sum ;
 
-    !this.unmount && this.setState(newState) ;
+    if(this.unmount) return ;
+
+    //已加载过.
+    if(!this.state.didMount && this.props.onDidMount) this.props.onDidMount() ;
+    this.setState(newState) ;
   }
 
   _onEndReached(){
@@ -380,7 +388,7 @@ export default class LCList extends Component {
     const footer = this.props.renderFooter ? this.props.renderFooter : (this.renderFooter ? this.renderFooter.bind(this) : this._renderFooter.bind(this)) ;
 
     return (
-			<ListView
+			<SGListView
         ref={view=>this.view=view}
         scrollsToTop={this.props.scrollsToTop}
         enableEmptySections={true}

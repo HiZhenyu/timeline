@@ -18,7 +18,6 @@ export default class LCExSuperb extends Component {
     } ;
 	}
 
-
   _onPress(item){
 
     if(!this.props.navigator) return ;
@@ -28,17 +27,11 @@ export default class LCExSuperb extends Component {
     this.props.navigator.push({
       screen: item.id ,
       passProps: props,
-      animated: true,
       title: item.name ,
       backButtonTitle: '返回',
-      backButtonHidden: false,
       navigatorStyle: {
         tabBarHidden: true,
-        navBarBackgroundColor: '#f9f9f9',
-        navBarBackgroundColor: '#f9f9f9',
-        navBarButtonColor: '#555',
-      },
-      navigatorButtons: {}
+      } ,
     }) ;
   }
 

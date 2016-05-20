@@ -21,24 +21,22 @@ export default class LCTaskListItem extends Component {
     this.props.style && (style.push(this.props.style)) ;
 
 		return (
-        <View style={style}>
-            <View style={styles.tit}><Text style={styles.titText} allowFontScaling={false}>{task.title}</Text></View>
-            <View style={styles.con}><Text style={styles.conText} allowFontScaling={false}>{task.intro}</Text></View>
-            <View style={styles.btm}>
-                <View style={styles.score}><Text style={styles.scoreText} allowFontScaling={false}>金币 <Text style={{color:'#f60',fontWeight:'bold'}} allowFontScaling={false}>{task.score}</Text> 个</Text></View>
-                <View style={styles.btn}>
-                  <LCTaskDidBtn task={task} did={task.hasget} />
-                </View>
-            </View>
-        </View>) ;
+      <View style={style}>
+        <View style={styles.tit}><Text style={styles.titText} allowFontScaling={false}>{task.title}</Text></View>
+        <View style={styles.con}><Text style={styles.conText} allowFontScaling={false}>{task.intro}</Text></View>
+        <View style={styles.btm}>
+          <View style={styles.score}><Text style={styles.scoreText} allowFontScaling={false}>金币 <Text style={{color:'#f60',fontWeight:'bold'}} allowFontScaling={false}>{task.score}</Text> 个</Text></View>
+          <View style={styles.btn}>
+            <LCTaskDidBtn task={task} did={task.hasget} />
+          </View>
+        </View>
+      </View>) ;
   }
 }
 
 var styles = StyleSheet.create({
   listItem:{
-    margin:15,
-    marginTop:0,
-    marginBottom:10,
+    margin:8,
 		padding: 10,
     borderWidth:1,
     borderRadius:10,

@@ -8,98 +8,21 @@ import {
   Dimensions
 } from 'react-native';
 
-
-export default class LCOnlineSP extends Component {
+import LCDetail from './../LCDetail' ;
+export default class LCOnlineSP extends LCDetail {
 
   constructor(props) {
     super(props) ;
 
-    this.state = {
-      online : global.getOnline()
-    } ;
-
-    this.storageKey = 'onlinedetail' ;
-    this.storageExpires = 3600*1000 ;
-  }
-
-  componentWillReceiveProps(nextProps){
-    if(!this.props.doUpdate && nextProps.doUpdate) this._fetch(nextProps.updateCallback ? nextProps.updateCallback:null,true) ;
-    if(this.props.holdOn && !nextProps.holdOn) return this._doMount() ;
-  }
-
-  componentDidMount() {
-    if(this.props.holdOn) return null ;
-    return this._doMount() ;
-  }
-
-  componentWillUnmount() {
-    this.unmount = true ;
-  }
-
-  _doMount(){
-    return this._fetchDefault() ;
-  }
-
-  _getStorageId(){
-    return this.state.online.uid ;
-  }
-
-  //获取初始状态的
-  _fetchDefault(callback){
-    if(this.loading) return false ;
-    this.loading = true ;
-
-    global.storage.sync[this.storageKey] = ((params)=>{
-      this.loading = false ;
-      this._fetch(callback) ;
-    }).bind(this) ;
-
-    global.storage.load({
-        key: this.storageKey ,
-        id:this._getStorageId(),
-        autoSync: true,
-        syncInBackground: false,
-    }).then( ret => {
-      this._doAssets(ret) ;
-      this.loading = false ;
-      if(callback) callback(ret) ;
-    }).catch( err => {
-        this.loading = false ;
-
-        //没读取到
-        this._fetch(callback) ;
-    }) ;
-
-    return true;
-  }
-
-  //通过远程接口获取
-  _fetch(callback,clear){
-    if(this.loading) return false ;
-
-    var post = {} ;
-
-    this.loading = true ;
-    global.v2iapi('online/detail',post,{
-      succ:(js)=>{
-        this._doAssets(js) ;
-        global.storage.save({key:this.storageKey,id:this._getStorageId(),rawData:js,expires:this.storageExpires}) ;
-      },
-      ever:(js)=>{
-        if(callback) callback(js) ;
-        this.loading = false ;
-      }
-    }) ;
-  }
-
-  _doAssets(js) {
-    var newState = {online:js.online} ;
-
-    if(!this.unmount) this.setState(newState) ;
+    this.itemKey = 'online' ;
+    this.itemIdKey = 'uid' ;
+    this.dataItemKey = 'online' ;
+    this.apiPath = 'online/detail' ;
   }
 
   render(){
-    var online = this.state.online ;
+    let online = this.state.online ;
+    !online && (online = {}) ;
     if(online.icon) online.icon = global.getUploadURL(online.icon) ;
     if(!online.level) online.level = {id:1,lv:1,name:'江小白'} ;
 

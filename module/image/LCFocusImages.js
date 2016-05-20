@@ -7,7 +7,7 @@ import {
   Dimensions
 } from 'react-native';
 
-import {IndicatorViewPager, PagerDotIndicator} from 'rn-viewpager';
+import {IndicatorViewPager, PagerDotIndicator} from './../pub/rn-viewpager/index';
 import LCList from './../LCList' ;
 
 export default class LCFocusImages extends LCList {
@@ -40,7 +40,7 @@ export default class LCFocusImages extends LCList {
     }) ;
 
     return (
-      <IndicatorViewPager style={{height:this.height}} indicator={(<PagerDotIndicator pageCount={tpls.length} />)}>
+      <IndicatorViewPager bounces={false} style={{height:this.height}} indicator={(<PagerDotIndicator pageCount={tpls.length} />)}>
         {tpls}
       </IndicatorViewPager>
     ) ;

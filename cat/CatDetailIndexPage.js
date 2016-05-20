@@ -68,8 +68,8 @@ export default class CatDetailIndexPage extends LCPage {
         } ,
         key : 'timeline'
       },
-
     ] ;
+
   }
 
   _onPressToMember(){

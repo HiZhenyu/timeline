@@ -19,13 +19,17 @@ export default class LCCommentItem extends Component {
     } ;
   }
 
-  getEmotionContents(content){
+  _getEmotionContents(content){
     let es = global.getEmotionContents(content) ;
 
     return es.map((it,i)=>{
       if(it.component == 'Text') return <Text key={i} allowFontScaling={false}>{it.content}</Text> ;
       if(it.component == 'Image') return <Image key={i} source={{uri:it.content,height:15,width:15}} />
     }) ;
+  }
+
+  _onPressReplyTo(e){
+    if(this.props.onPressReplyTo) this.props.onPressReplyTo(this.state.comment) ;
   }
 
   render(){
@@ -36,7 +40,7 @@ export default class LCCommentItem extends Component {
 
     let pwidth = Dimensions.get('window').width - 60 ;
 
-    let tplTitle = commentText ? <Text style={styles.commentText} allowFontScaling={false}>{this.getEmotionContents(commentText)}</Text> : false ;
+    let tplTitle = commentText ? <Text style={styles.commentText} allowFontScaling={false}>{this._getEmotionContents(commentText)}</Text> : false ;
     let tplImages = images && images.sum ? <LCTimelineImages navigator={this.props.navigator} oneImageCenter={false} pwidth={pwidth} images={images.list} /> : false ;
 
     let style = [styles.item,styles.flex] ;
@@ -52,7 +56,7 @@ export default class LCCommentItem extends Component {
           <View style={styles.postTime}>
             <Text style={styles.postTimeText} allowFontScaling={false}>{comment.create_time}</Text>
           </View>
-          <TouchableOpacity style={styles.toReply}>
+          <TouchableOpacity onPress={this._onPressReplyTo.bind(this)} style={styles.toReply}>
             <Image resizeMode="contain" style={styles.toReplyImage} source={require('./../../images/icon_reply.png')} />
           </TouchableOpacity>
         </View>

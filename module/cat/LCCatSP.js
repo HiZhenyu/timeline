@@ -7,107 +7,24 @@ import {
   Image
 } from 'react-native';
 
-import GiftedSpinner from 'react-native-gifted-spinner' ;
-
 import LCCatSignBtn from './LCCatSignBtn' ;
 import LCCatJoinBtn from './LCCatJoinBtn' ;
+import LCDetail from './../LCDetail'  ;
 
-export default class LCCatSP extends Component {
+export default class LCCatSP extends LCDetail {
   constructor(props) {
     super(props) ;
 
-    this.didMount = false ;
-		this.state = {
-      cat:this.props.cat
-		};
+    this.itemKey = 'cat' ;
 
-    this.storageKey = 'catdetail' ;
-    this.storageExpires = 86400*1000 ;
+    this.itemIdKey = 'id' ;
+
+    this.apiPath = 'cat/detail' ;
+
+    this.dataItemKey = 'cat' ;
   }
 
-  componentWillReceiveProps(nextProps){
-    if(!this.props.doUpdate && nextProps.doUpdate) this._fetch(nextProps.updateCallback ? nextProps.updateCallback:null,true) ;
-    if(this.props.holdOn && !nextProps.holdOn) return this._doMount() ;
-  }
-
-  componentDidMount() {
-    if(this.props.holdOn) return null ;
-    return this._doMount() ;
-  }
-
-  componentWillUnmount() {
-    this.unmount = true ;
-  }
-
-  _doMount(){
-    if(!this.props.cat.id) return null ;
-    return this._fetchDefault() ;
-  }
-
-  _getStorageId(){
-    return this.props.cat.id ;
-  }
-
-  //获取初始状态的
-  _fetchDefault(callback){
-    if(this.loading) return false ;
-    this.loading = true ;
-
-    global.storage.sync[this.storageKey] = (()=>{
-      this.loading = false ;
-      this._fetch(callback) ;
-    }).bind(this) ;
-
-    global.storage.load({
-        key: this.storageKey ,
-        id:this._getStorageId(),
-        autoSync: true,
-        syncInBackground: false,
-    }).then( ret => {
-      this._doAssets(ret) ;
-
-      this.loading = false ;
-
-      if(callback) callback(ret) ;
-    }).catch( err => {
-        this.loading = false ;
-
-        //没读取到
-        this._fetch(callback) ;
-    }) ;
-
-    return true;
-  }
-
-  //通过远程接口获取
-  _fetch(callback){
-    if(this.loading) return false ;
-
-    var post = {} ;
-    post.id = this.state.cat.id ;
-
-    this.loading = true ;
-    global.v2iapi('cat/detail',post,{
-      succ:(js)=>{
-        this._doAssets(js) ;
-        global.storage.save({key:this.storageKey,id:this._getStorageId(),rawData:js,expires:this.storageExpires}) ;
-      },
-      ever:(js)=>{
-        if(callback) callback(js) ;
-        this.loading = false ;
-      }
-    }) ;
-  }
-
-  _doAssets(js) {
-    var newState = {} ;
-    newState.cat = js.cat ;
-
-    this.didMount = true ;
-    if(!this.unmount) this.setState(newState) ;
-  }
-
-	render() {
+	renderDetail() {
     var cat = this.state.cat ;
     if(!cat.icon) cat.icon = 'upfs/201511/12/f_1447322833751985.png' ;
     if(!cat.user) cat.user = {} ;
@@ -130,8 +47,8 @@ export default class LCCatSP extends Component {
               </Text>
             </View>
             <View style={styles.ops}>
-              <LCCatSignBtn navigator={this.props.navigator} style={styles.opsBtnl} cat={this.state.cat} />
-              <LCCatJoinBtn navigator={this.props.navigator} style={styles.opsBtnr} cat={this.state.cat} />
+              <LCCatSignBtn navigator={this.props.navigator} style={styles.opsBtnl} catId={this.state.cat.id} />
+              <LCCatJoinBtn navigator={this.props.navigator} style={styles.opsBtnr} catId={this.state.cat.id} />
             </View>
           </View>
         </View>

@@ -18,10 +18,10 @@ export default class LCTimelineImages extends Component {
     } ;
   }
 
-  _onPress(aimg,i){
+  _onPress(i){
     let props = {images:this.state.images,defaultIndex:i} ;
 
-    Navigation.showModal({
+    this.props.navigator.showModal({
       screen: 'timeline.SlideImagesPage',
       title: '',
       passProps: props,
@@ -50,8 +50,10 @@ export default class LCTimelineImages extends Component {
 
       if(aimg.thumb) aimg.thumb = global.getUploadURL(aimg.thumb) ;
       if(aimg.hdimg) aimg.hdimg = global.getUploadURL(aimg.hdimg) ;
-      if(!aimg.hdimg) aimg.hdimg = aimg.thumb.replace('300x300','1024x1024').replace('600x600','1024x1024') ;
+      if(!aimg.hdimg && aimg.thumb) aimg.hdimg = aimg.thumb.replace('300x300','1024x1024').replace('600x600','1024x1024') ;
 
+      let aimgSource = aimg.thumb ? {uri:aimg.thumb} : aimg ;
+      
       let astyle = [styles.image,{ width: (PWidth - 51)/3,height: (PWidth - 51)/3 }] ;
       if(imagesSize == 4) wrapStyle.push({paddingRight:(PWidth - 50)/3}) ;
 
@@ -70,14 +72,12 @@ export default class LCTimelineImages extends Component {
             if(this.props.oneImageInCenter) amarginLeft = (PWidth - awidth - 20) / 2 ;
           }
 
-
           astyle.push({width:awidth,height:aheight,margin:0,marginLeft:amarginLeft}) ;
       }
 
-
       tplImages.push((
-        <TouchableOpacity key={i} onPress={this._onPress.bind(this,aimg,i)}>
-          <Image style={astyle} source={{uri:aimg.thumb}} />
+        <TouchableOpacity key={i} onPress={this._onPress.bind(this,i)}>
+          <Image style={astyle} source={aimgSource} />
         </TouchableOpacity>
       )) ;
     }

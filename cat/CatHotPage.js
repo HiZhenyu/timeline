@@ -3,7 +3,7 @@ import {
   StyleSheet,
 } from 'react-native';
 
-import GiftedSpinner from 'react-native-gifted-spinner' ;
+import GiftedSpinner from './../module/pub/GiftedSpinner' ;
 import LCCatHots from './../module/cat/LCCatHots' ;
 import LCTitle from './../module/pub/LCTitle' ;
 import LCMoreBox from './../module/pub/LCMoreBox' ;

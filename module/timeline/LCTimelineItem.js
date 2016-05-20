@@ -25,30 +25,23 @@ export default class LCTimelineItem extends Component {
   }
 
   componentWillReceiveProps(nextProps){
-    let otimeline = this.state.timeline ;
-    let ntimeline = nextProps.timeline ;
-
-    if(otimeline.id != ntimeline.id || otimeline.content != ntimeline.content || otimeline.digs.sum != ntimeline.digs.sum || otimeline.comments.sum != ntimeline.comments.sum){
+    if(nextProps.timeline && nextProps.timeline != this.props.timeline){
         this.setState({timeline:nextProps.timeline}) ;
     }
   }
 
   _onPress(){
     if(!this.props.navigator) return ;
-    var props = {timeline:this.state.timeline} ;
+    let props = {timeline:this.state.timeline} ;
 
-    //使用Navigation方案
     this.props.navigator.push({
       screen: 'timeline.TimelinePage',
       title: props.timeline.cat.name,
       backButtonTitle: '返回',
       passProps: props,
-      animated: true,
-      backButtonHidden: false,
       navigatorStyle: {
         tabBarHidden: true,
       } ,
-      navigatorButtons: {}
     });
 
     return ;
@@ -59,25 +52,31 @@ export default class LCTimelineItem extends Component {
     if(!this.props.navigator) return ;
     var props = {timelineId:this.state.timeline.id,list:this.state.timeline.digs} ;
 
-    //使用Navigation方案
     this.props.navigator.push({
       screen: 'timeline.TimelineDigsPage',
       title: '点赞的机友们',
       backButtonTitle: '返回',
       passProps: props,
-      animated: true,
-      backButtonHidden: false,
       navigatorStyle: {
         tabBarHidden: true,
       } ,
-      navigatorButtons: {}
     });
 
     return ;
   }
 
+  //成功点赞
+  _onSuccDig(digUser){
+    var atimeline = this.state.timeline ;
+    atimeline.dig.did = true ;
+    atimeline.digs.list.push(digUser) ;
+    atimeline.digs.sum++ ;
 
-  getEmotionContents(content){
+    this.setState(atimeline) ;
+  }
+
+
+  _getEmotionContents(content){
     let es = global.getEmotionContents(content) ;
 
     return es.map((it,i)=>{
@@ -92,7 +91,7 @@ export default class LCTimelineItem extends Component {
       <View style={[styles.commentsItem]} key={comment.id}>
         <Text style={styles.commentItemText} allowFontScaling={false}>
           <LCUser navigator={this.props.navigator} user={comment.user} styleId={2} />：
-          <Text style={styles.itemcText} numberOfLines={3} allowFontScaling={false}>{this.getEmotionContents(comment.content)}</Text>
+          <Text style={styles.itemcText} numberOfLines={3} allowFontScaling={false}>{this._getEmotionContents(comment.content)}</Text>
         </Text>
       </View>
     ) ;
@@ -129,9 +128,8 @@ export default class LCTimelineItem extends Component {
 
     let tplSubject = timeline.subject && timeline.subject.id ? (<LCSubjectItem navigator={this.props.navigator} subject={timeline.subject} />) : null ;
 
-
     //
-    let tplTitle = timelineText ? <Text style={styles.timelineText} allowFontScaling={false}>{tplSubject}{this.getEmotionContents(timelineText)}</Text> : null ;
+    let tplTitle = timelineText || tplSubject ? <Text style={styles.timelineText} allowFontScaling={false}>{tplSubject}{this._getEmotionContents(timelineText)}</Text> : null ;
 
     let tplImages = images && images.sum ? <LCTimelineImages navigator={this.props.navigator} oneImageInCenter={true} images={images.list} /> : null ;
     let tplDigs = this._renderDigs(digs) ;
@@ -162,9 +160,9 @@ export default class LCTimelineItem extends Component {
 
     let tplOps = (
       <View style={[styles.flexRow,styles.timelineOps,styles.flex,styles.plr10]}>
-        <LCMComment navigator={this.props.navigator} timelineId={timeline.id} isum={timeline.comment.sum} />
+        <LCMComment navigator={this.props.navigator} timeline={timeline} />
         <View style={{marginLeft:20}} />
-        <LCMDig navigator={this.props.navigator} timelineId={timeline.id} showDigText={true} did={timeline.dig.did} isum={timeline.dig.sum} timelineObj={this} />
+        <LCMDig navigator={this.props.navigator} timelineId={timeline.id} showDigText={true} did={timeline.dig.did} num={timeline.dig.sum} onSucc={this._onSuccDig.bind(this)} />
         <View style={styles.flex} />
         <LCMDrop navigator={this.props.navigator} timelineId={timeline.id} />
       </View>) ;

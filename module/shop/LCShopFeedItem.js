@@ -22,17 +22,8 @@ export default class LCCatItem extends Component {
     this.props.navigator.push({
       screen: 'shop.ShopItemPage',
       passProps: props,
-      animated: true,
       title: props.shopItem.name ,
       backButtonTitle: '返回',
-      backButtonHidden: false,
-      navigatorStyle: {
-        tabBarHidden: true,
-        navBarBackgroundColor: '#f9f9f9',
-        navBarBackgroundColor: '#f9f9f9',
-        navBarButtonColor: '#555',
-      },
-      navigatorButtons: {}
     });
 
   }

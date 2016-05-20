@@ -30,22 +30,15 @@ export default class LCUser extends Component {
     if(!this.state.user || !this.state.user.uid || this.state.user.uid == '0') return ;
 
     let props = {user:this.state.user} ;
-
-    //使用Navigation方案
+    
     this.props.navigator.push({
       screen: 'user.UserHomePage',
       passProps: props,
-      animated: true,
       title: props.user.name ,
       backButtonTitle: '返回',
-      backButtonHidden: false,
       navigatorStyle: {
         tabBarHidden: true,
-        navBarBackgroundColor: '#f9f9f9',
-        navBarBackgroundColor: '#f9f9f9',
-        navBarButtonColor: '#555',
-      },
-      navigatorButtons: {}
+      } ,
     });
 
     return ;

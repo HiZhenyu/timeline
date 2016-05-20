@@ -1,8 +1,15 @@
 import { Navigation } from 'react-native-navigation';
 
 import IndexMainPage from './index/IndexMainPage';
+
 import MyHomePage from './my/MyHomePage';
+import MySettingPage from './my/MySettingPage';
 import MsgPage from './my/MsgPage';
+import JiyouhuiUserIconPage from './my/JiyouhuiUserIconPage';
+import MySettingInputPage from './my/MySettingInputPage';
+import MyPasswdPage from './my/MyPasswdPage';
+import UnameResetPage from './my/UnameResetPage';
+
 
 import UserHomePage from './user/UserHomePage' ;
 import UserTimelinePage from './user/UserTimelinePage' ;
@@ -15,7 +22,7 @@ import ExploreIndexPage from './explore/ExploreIndexPage' ;
 
 import PostTimelinePage from './post/PostTimelinePage' ;
 import SelectPhotosPage from './post/SelectPhotosPage' ;
-
+import SelectMyCatPage from './post/SelectMyCatPage' ;
 
 import CatDetailMainPage from './cat/CatDetailMainPage' ;
 import CatDetailIndexPage from './cat/CatDetailIndexPage' ;
@@ -49,6 +56,12 @@ export function registerScreens() {
 
   Navigation.registerComponent('my.MyHomePage', () => MyHomePage);
   Navigation.registerComponent('my.MsgPage', () => MsgPage);
+  Navigation.registerComponent('my.MySettingPage', () => MySettingPage);
+  Navigation.registerComponent('my.JiyouhuiUserIconPage', () => JiyouhuiUserIconPage);
+  Navigation.registerComponent('my.MySettingInputPage', () => MySettingInputPage);
+  Navigation.registerComponent('my.MyPasswdPage', () => MyPasswdPage);
+  Navigation.registerComponent('my.UnameResetPage', () => UnameResetPage);
+
 
   Navigation.registerComponent('user.UserHomePage', () => UserHomePage);
   Navigation.registerComponent('user.UserTimelinePage', () => UserTimelinePage);
@@ -59,6 +72,7 @@ export function registerScreens() {
 
   Navigation.registerComponent('post.PostTimelinePage', () => PostTimelinePage);
   Navigation.registerComponent('post.SelectPhotosPage', () => SelectPhotosPage);
+  Navigation.registerComponent('post.SelectMyCatPage', () => SelectMyCatPage);
 
   Navigation.registerComponent('explore.ExploreIndexPage', () => ExploreIndexPage);
 

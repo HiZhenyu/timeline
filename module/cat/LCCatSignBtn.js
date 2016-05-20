@@ -7,82 +7,24 @@ import {
   Image
 } from 'react-native';
 
+import LCDid from './../LCDid' ;
+
 /**
  * 机友会签到按钮
  */
-export default class LCCatSignBtn extends Component {
+export default class LCCatSignBtn extends LCDid {
   constructor(props) {
     super(props) ;
 
-    this.state = {
-      cat: this.props.cat ,
-      did: !!this.props.did ,
+    this.check = {
+      api : 'cat/hassign' ,
+      data : {id:this.props.catId}
     } ;
-  }
 
-  componentWillReceiveProps(nextProps){
-    if(!this.props.doUpdate && nextProps.doUpdate) this._fetch(nextProps.updateCallback ? nextProps.updateCallback:null) ;
-    if(this.props.holdOn && !nextProps.holdOn) return this._doMount() ;
-  }
-
-  componentDidMount() {
-    if(this.props.holdOn) return null ;
-    return this._doMount() ;
-  }
-
-  componentWillUnmount() {
-    this.unmount = true ;
-  }
-
-  _doMount(){
-    if(!this.state.cat || !this.state.cat.id) return ;
-    return this._fetch() ;
-  }
-
-  //获取当前状态
-  _fetch(){
-    v2iapi('cat/hassign',{id:this.state.cat.id},{
-      succ:(js)=>{
-        this._doAssets(js) ;
-      },
-      ever:(js)=>{
-
-      },
-      fail:(js)=>{
-
-      }
-    }) ;
-  }
-
-
-  _onPress(){
-    if(this.digXing) return ;
-
-    var online = global.getOnline() ;
-    if(!online.uid){
-      global.toLogin() ;
-      return ;
-    }
-
-    if(this.state.did) return ;
-
-    this.digXing = true ;
-    v2iapi('cat/dosign',{id:this.state.cat.id},{
-      succ:(js)=>{
-        this._doAssets(js) ;
-      },
-      ever:(js)=>{
-        this.digXing = false ;
-        if(!js || !js.code || js.code != '200') if(!this.unmount) this.setState({did:false}) ;
-      }
-    }) ;
-  }
-
-  _doAssets(js) {
-    if(!js.did) return ;
-    if(this.unmount) return ;
-
-    this.setState({did:true}) ;
+    this.dodid = {
+      api : 'cat/dosign' ,
+      data : {id:this.props.catId}
+    } ;
   }
 
   render(){
@@ -100,7 +42,7 @@ export default class LCCatSignBtn extends Component {
     return (
       <TouchableHighlight underlayColor="#F6F6F6" style={style} onPress={this._onPress.bind(this)}>
         <View style={styles.opsBtnView}>
-          <Image style={styles.opsBtnImage} source={signIcon} />
+          <Image style={styles.opsBtnImage} source={signIcon} key={this.state.did} />
           <Text style={styles.opsBtnText} allowFontScaling={false}>{signText}</Text>
         </View>
       </TouchableHighlight>

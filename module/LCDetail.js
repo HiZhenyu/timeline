@@ -5,7 +5,7 @@ import {
   Text ,
 } from 'react-native';
 
-import GiftedSpinner from 'react-native-gifted-spinner' ;
+import GiftedSpinner from './pub/GiftedSpinner' ;
 
 export default class LCDetail extends Component {
 
@@ -21,7 +21,7 @@ export default class LCDetail extends Component {
     //3、接口路径
     this.apiPath = '' ;
 
-    //4、通过http获取到的主体下标，通常会等于 itemKey ，如不传入，则为data本身
+    //4、通过http获取到的主体下标，通常会等于 itemKey
     this.dataItemKey = '' ;
 
     //5、其他post参数

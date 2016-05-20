@@ -7,60 +7,49 @@ import {
   Image
 } from 'react-native';
 
-export default class LCMDig extends Component {
+import LCIconTextBtn from './../pub/LCIconTextBtn' ;
+import LCDid from './../LCDid' ;
+
+export default class LCMDig extends LCDid {
+  static defaultProps = {
+    sum : 0 ,
+  } ;
+
   constructor(props) {
     super(props) ;
 
-    //timelineId
-    this.timelineId = this.props.timelineId ? this.props.timelineId : '0' ;
-    this.state = {
-      num: this.props.isum ? this.props.isum : 0,
-      did: !!this.props.did
+    this.dodid = {
+      api : 'iop/good' ,
+      data : {timeline_id : this.props.timelineId}
     } ;
+
+    this.state.num = this.props.num ;
   }
 
-  _onPress(){
-    if(this.digXing) return ;
+  dodidThenSucc(data){
+    this.setState({num:++this.state.num}) ;
+    if(data.score) global.tip('点赞成功，并获得'+data.score+'金币!') ;
 
-    var online = global.getOnline() ;
-    console.log(online);
-    if(!online.uid){
-      global.toLogin() ;
+    if(this.props.onSucc){
+      let props = {} ;
+      props.id = data.id ;
+      props.create_time = data.create_time ;
+      props.user = global.getOnline() ;
+
+      this.props.onSucc(props) ;
+    }
+  }
+
+  dodidThenEver(js){
+    if(!js) js = {} ;
+    if(js && js.code == '300'){
+      this.setState({did:true}) ;
       return ;
     }
-
-    if(this.state.did) return ;
-
-    this.setState({did:true}) ;
-
-    var post = {} ;
-    post.timeline_id = this.timelineId ;
-
-    this.digXing = true ;
-    v2iapi('iop/good',post,{
-      succ:(js)=>{
-        this.setState({num:++this.state.num,did:true}) ;
-        if(js.score) global.tip('点赞成功，并获得'+js.score+'金币!') ;
-
-        if(this.props.timelineObj){
-          var atimeline = this.props.timelineObj.state.timeline ;
-          atimeline.dig.did = true ;
-          atimeline.digs.list.push({id:js.id,create_time:js.create_time,user:online}) ;
-          atimeline.digs.sum++ ;
-
-          this.props.timelineObj.setState(atimeline) ;
-        }
-
-      },
-      ever:(js)=>{
-        this.digXing = false ;
-        if(js && js.code == '300') this.setState({did:true}) ;
-      }
-    }) ;
   }
 
   render(){
-    let style = [styles.flexRow] ;
+    let style = [] ;
     if(this.props.style) style.push(this.props.style) ;
 
     let numText = this.state.num ? (<Text allowFontScaling={false}>({this.state.num})</Text>) : '' ;
@@ -74,8 +63,8 @@ export default class LCMDig extends Component {
     if(this.props.digTextStyle) digTextStyle.push(this.props.digTextStyle) ;
 
     return (
-      <TouchableOpacity underlayColor="#ccc" onPress={this._onPress.bind(this)}>
-        <View style={style}>
+      <TouchableOpacity style={style} underlayColor="#ccc" onPress={this._onPress.bind(this)}>
+        <View style={styles.flexRow}>
           <Image style={digImageStyle} source={digImage} />
           <Text style={digTextStyle} allowFontScaling={false}>{didText}{numText}</Text>
         </View>

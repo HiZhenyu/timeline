@@ -89,7 +89,7 @@ export default class LCTaskDidBtn extends Component {
     }
 
     return (
-      <TouchableHighlight underlayColor="#F6F6F6" style={style} onPress={onPress}>
+      <TouchableHighlight underlayColor="#ccc" style={style} onPress={onPress}>
         <View style={styles.opsBtnView}>
           <Text style={styles.opsBtnText} allowFontScaling={false}>{btnText}</Text>
         </View>
@@ -110,6 +110,7 @@ const styles = StyleSheet.create({
     width:80,
     height:25,
     backgroundColor:'#f60',
+    borderRadius:2,
   },
   opsBtnBgc:{
     backgroundColor:'#999'
@@ -118,6 +119,7 @@ const styles = StyleSheet.create({
     textAlign:'center',
     color:'#fff',
     fontWeight:'bold',
+    fontSize:15,
   }
 
 }) ;
